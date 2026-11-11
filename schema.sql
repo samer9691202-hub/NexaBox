@@ -1,0 +1,13 @@
+create table if not exists public.projects(id uuid primary key,user_id uuid not null references auth.users(id) on delete cascade,name text not null,version text not null,updated_date date,description text default '',zip_path text,apk_path text,zip_name text,apk_name text,created_at timestamptz default now(),updated_at timestamptz default now());
+alter table public.projects enable row level security;
+drop policy if exists "Users manage own projects" on public.projects;
+create policy "Users manage own projects" on public.projects for all to authenticated using(auth.uid()=user_id) with check(auth.uid()=user_id);
+insert into storage.buckets(id,name,public,file_size_limit,allowed_mime_types) values('nexabox-files','nexabox-files',false,2147483648,array['application/zip','application/x-zip-compressed','application/vnd.android.package-archive','application/octet-stream']) on conflict(id) do nothing;
+drop policy if exists "NexaBox upload own files" on storage.objects;
+create policy "NexaBox upload own files" on storage.objects for insert to authenticated with check(bucket_id='nexabox-files' and (storage.foldername(name))[1]=auth.uid()::text);
+drop policy if exists "NexaBox read own files" on storage.objects;
+create policy "NexaBox read own files" on storage.objects for select to authenticated using(bucket_id='nexabox-files' and (storage.foldername(name))[1]=auth.uid()::text);
+drop policy if exists "NexaBox update own files" on storage.objects;
+create policy "NexaBox update own files" on storage.objects for update to authenticated using(bucket_id='nexabox-files' and (storage.foldername(name))[1]=auth.uid()::text) with check(bucket_id='nexabox-files' and (storage.foldername(name))[1]=auth.uid()::text);
+drop policy if exists "NexaBox delete own files" on storage.objects;
+create policy "NexaBox delete own files" on storage.objects for delete to authenticated using(bucket_id='nexabox-files' and (storage.foldername(name))[1]=auth.uid()::text);
