@@ -1,4 +1,4 @@
-const CACHE='nexabox-local-only-v13';
+const CACHE='nexabox-local-only-v14';
 const ASSETS=['./','./index.html','./manifest.webmanifest','./assets/icon.svg','./assets/icon-white.svg'];
 self.addEventListener('install',event=>event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(ASSETS);await self.skipWaiting()})()));
 self.addEventListener('activate',event=>event.waitUntil((async()=>{for(const key of await caches.keys())if(key!==CACHE)await caches.delete(key);await self.clients.claim()})()));
