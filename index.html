@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#A33D2D"><meta name="description" content="NexaBox — مساحة شخصية لتنظيم المشاريع محلياً">
-<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="assets/nexabox-app-icon.png"><title>NexaBox | مساحة مشاريعي</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" type="image/png" href="assets/icon-192.png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><title>NexaBox | مساحة مشاريعي</title>
 <style>
 /* إخفاء بطاقات إحصائيات المشاريع الثلاث من الواجهة */
 .stats{display:none!important;}
@@ -417,4 +417,4 @@ function hideNexaSplash(){const splash=$('nexaSplash');if(!splash||splash.datase
 // Keep the branded screen visible long enough for the logo to render; never block startup indefinitely.
 setTimeout(hideNexaSplash,10000);
 window.addEventListener('load',async()=>{let startupError='';try{const projectSearch=$('search');if(projectSearch)projectSearch.value='';page=1;await openDB();applyPrefs();await load();if(!items.length){const recovered=await recoverLegacyProjects();if(recovered)await load()}if(prefs.lockEnabled&&prefs.lockOnReturn&&prefs.pinHash)lockApp()}catch(e){console.error(e);startupError='تعذر فتح التخزين المحلي: '+(e.message||'خطأ غير معروف');if($('projectLoadStatus'))$('projectLoadStatus').textContent='تعذر تحميل المشاريع: '+(e.message||'خطأ في التخزين المحلي')}finally{hideNexaSplash();/* Startup errors stay in the main screen status area; never show a popup over or immediately after the splash screen. */}});
-</script></body></html>
+</script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').catch(()=>{})})}</script></body></html>
