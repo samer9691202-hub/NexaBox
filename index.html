@@ -144,111 +144,9 @@
 .security-modal .sheet{max-height:88vh;overflow:auto}
 
 
-/* Backup destination card — NexaBox 4.3.5 */
-.backup-panel{padding:18px!important}.backup-hero{display:flex;align-items:center;gap:13px;margin:0 0 16px}.backup-hero-icon{width:52px;height:52px;display:grid;place-items:center;flex:none;border-radius:17px;background:var(--soft);font-size:25px}.backup-hero h3{font-size:17px;margin:0;color:var(--ink)}.backup-hero p{font-size:11px;color:var(--muted);margin:3px 0 0}.backup-info{line-height:1.8;margin-bottom:17px}.backup-destination-title{font-size:12px;font-weight:800;margin:0 0 9px;color:var(--ink)}.backup-choice{width:100%;display:flex;align-items:center;gap:12px;text-align:right;padding:13px;margin:8px 0;border:1px solid var(--line);border-radius:15px;background:var(--surface);color:var(--ink);transition:.18s}.backup-choice:hover,.backup-choice:focus-visible{border-color:var(--accent2);transform:translateY(-1px);box-shadow:var(--shadow);outline:none}.backup-choice-primary{border-color:color-mix(in srgb,var(--accent) 45%,var(--line));background:color-mix(in srgb,var(--soft) 48%,var(--surface))}.backup-choice-icon{width:42px;height:42px;display:grid;place-items:center;flex:none;border-radius:13px;background:var(--soft);font-size:20px}.backup-choice>span:nth-child(2){display:grid;gap:3px;flex:1}.backup-choice b{font-size:12px}.backup-choice small,.backup-import-head small{font-size:10px;color:var(--muted);line-height:1.6}.backup-choice i{font-style:normal;font-size:24px;color:var(--accent)}.backup-divider{height:1px;background:var(--line);margin:17px 0}.backup-import-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}.backup-import-head>span{width:36px;height:36px;display:grid;place-items:center;border-radius:11px;background:var(--soft);font-size:17px}.backup-import-head div{display:grid;gap:2px}.backup-import-head b{font-size:12px}.backup-panel .message-box{line-height:1.8;overflow-wrap:anywhere}
-@media(max-width:520px){.backup-panel{padding:13px!important}.backup-choice{padding:11px}.backup-choice-icon{width:38px;height:38px}}
-
-
-
-/* NexaBox 4.3.5 — unified premium treatment for every card and panel */
-:root{--card-radius:22px;--card-border:color-mix(in srgb,var(--accent) 12%,var(--line));--card-shadow:0 8px 24px rgba(45,31,24,.055);--card-shadow-hover:0 16px 34px rgba(45,31,24,.105)}
-body{background:radial-gradient(ellipse at 8% 0%,color-mix(in srgb,var(--soft) 48%,transparent),transparent 34%),var(--paper)}
-.local-label{border-color:var(--card-border);background:color-mix(in srgb,var(--surface) 86%,var(--soft));box-shadow:0 3px 12px #30231a08}
-.intro{gap:16px;margin-bottom:24px}
-.intro-main,.intro-side{border-radius:28px;box-shadow:var(--card-shadow);isolation:isolate}
-.intro-main{background:linear-gradient(135deg,#282522 0%,#39312d 100%);border:1px solid #ffffff12}
-.intro-side{background:linear-gradient(145deg,var(--accent),color-mix(in srgb,var(--accent) 82%,#57251e));border:1px solid color-mix(in srgb,var(--accent) 72%,white 8%)}
-.stats{gap:12px;margin-bottom:30px}
-.stat{position:relative;overflow:hidden;min-height:98px;border-radius:20px;border-color:var(--card-border);background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--surface) 90%,var(--soft)));box-shadow:var(--card-shadow);padding:18px 19px;transition:transform .2s,box-shadow .2s,border-color .2s}
-.stat:after{content:"";position:absolute;inset:auto -18px -32px auto;width:88px;height:88px;border-radius:50%;background:var(--soft);opacity:.42;pointer-events:none}
-.stat:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);border-color:color-mix(in srgb,var(--accent) 32%,var(--line))}
-.stat-icon{position:relative;z-index:1;width:43px;height:43px;border-radius:15px;background:linear-gradient(145deg,var(--soft),color-mix(in srgb,var(--soft) 65%,var(--accent) 12%));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 9%,transparent)}
-.stat strong{font-size:31px;position:relative;z-index:1}
-.section-head{margin:0 0 14px}
-.section-head h2{font-size:26px;letter-spacing:-.3px}
-.toolbar{border-radius:17px;border-color:var(--card-border);box-shadow:0 4px 15px #30231a07;padding:8px 10px}
-.toolbar:focus-within{border-color:var(--accent2);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent)}
-.grid{gap:15px;margin-top:15px}
-.project-card{border-radius:var(--card-radius);border:1px solid var(--card-border);padding:22px 22px 20px;box-shadow:var(--card-shadow);background:color-mix(in srgb,var(--surface) calc(var(--card-opacity,1)*100%),transparent);}
-.project-card:before{width:4px;opacity:.85;transition:width .2s,opacity .2s}
-.project-card:hover{transform:translateY(-4px);box-shadow:var(--card-shadow-hover);border-color:color-mix(in srgb,var(--accent) 38%,var(--line))}
-.project-card:hover:before{width:6px;opacity:1}
-.projtop{min-width:0;padding-inline-start:34px}
-.projtop>div:last-child{min-width:0}
-.ico{width:54px;height:54px;border-radius:17px;background:linear-gradient(145deg,var(--soft),color-mix(in srgb,var(--soft) 65%,var(--accent) 12%));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 9%,transparent);overflow:hidden}
-.name{font-size:16px;line-height:1.5;overflow-wrap:anywhere}
-.project-card .tags{margin:15px 0 10px;gap:7px}
-.tag{border:1px solid color-mix(in srgb,var(--accent) 9%,var(--line));border-radius:9px;padding:5px 10px;background:color-mix(in srgb,var(--surface) 75%,var(--soft));color:var(--muted);font-weight:600}
-.project-card p{line-height:1.85;margin:8px 0 13px;min-height:0}
-.project-actions{display:flex;gap:9px;margin-top:17px;padding-top:14px;border-top:1px solid var(--line)}
-.project-actions .btn{flex:1;min-height:43px;border-radius:12px}
-.pin-project{top:15px;left:15px;width:36px;height:36px;border-radius:12px;box-shadow:0 3px 10px #30231a0b}
-.empty{border-radius:22px;border-color:color-mix(in srgb,var(--accent) 22%,var(--line));background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--surface) 90%,var(--soft)));box-shadow:var(--card-shadow);line-height:1.8}
-.btn{border-radius:13px;min-height:40px;box-shadow:0 2px 8px #30231a08}
-.btn:focus-visible,.settings-tile:focus-visible,.backup-choice:focus-visible,.nav button:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 30%,transparent);outline-offset:2px}
-.btn.primary{background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 78%,#67281e))!important;box-shadow:0 5px 13px color-mix(in srgb,var(--accent) 19%,transparent)}
-.btn.soft{border:1px solid color-mix(in srgb,var(--accent) 12%,var(--line));background:color-mix(in srgb,var(--soft) 78%,var(--surface))!important}
-.nav{border:1px solid #ffffff16;border-radius:19px;padding:7px;background:color-mix(in srgb,var(--ink) 94%,var(--accent));box-shadow:0 16px 40px #211b1645;backdrop-filter:blur(14px)}
-.nav button{border-radius:12px;min-height:42px;transition:background .18s,transform .18s}
-.nav button:active{transform:scale(.96)}
-.sheet{border:1px solid var(--card-border);border-radius:27px;box-shadow:0 28px 90px #0005;background:linear-gradient(155deg,var(--surface),color-mix(in srgb,var(--surface) 94%,var(--soft)))}
-.sheet h2{letter-spacing:-.25px}
-.close{border:1px solid var(--line);border-radius:11px;background:var(--paper);min-width:38px;min-height:36px}
-.sheet input,.sheet textarea,.sheet select{border-radius:13px;border-color:var(--card-border);background:var(--paper);transition:border-color .18s,box-shadow .18s}
-.sheet input:focus,.sheet textarea:focus,.sheet select:focus{outline:0;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent);border-color:var(--accent2)}
-.upload-field{border-radius:17px;border-color:color-mix(in srgb,var(--accent) 27%,var(--line));background:color-mix(in srgb,var(--surface) 75%,var(--soft));padding:15px}
-.upload-pick{min-height:45px;border:1px solid color-mix(in srgb,var(--accent) 13%,var(--line));border-radius:12px;background:var(--soft)}
-.selected-file,.identity-preview,.icon-picker{border-radius:13px;border-color:var(--line);background:var(--surface)}
-.attachment{border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--surface) 80%,var(--soft));padding:11px 12px}
-.attachment-actions button{border:1px solid var(--line);border-radius:9px;background:var(--surface);min-height:32px}
-#projectDetails{padding-top:4px}
-#projectDetails h3{font-size:14px;margin:19px 0 8px;padding-bottom:7px;border-bottom:1px solid var(--line);color:var(--ink)}
-#projectDetails>p{font-size:13px;line-height:1.95;color:var(--muted);padding:12px 14px;border-radius:13px;background:var(--paper)}
-#projectDetails .projtop{padding:14px;border:1px solid var(--line);border-radius:17px;background:color-mix(in srgb,var(--surface) 82%,var(--soft))}
-.settings-sheet{border-radius:28px}
-.settings-home{gap:13px}
-.settings-tile{border-radius:18px;border-color:var(--card-border);background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--surface) 94%,var(--soft)));box-shadow:var(--card-shadow);transition:transform .2s,box-shadow .2s,border-color .2s}
-.settings-tile:hover{transform:translateY(-3px);box-shadow:var(--card-shadow-hover);border-color:color-mix(in srgb,var(--accent) 34%,var(--line))}
-.settings-tile .tile-icon{border-radius:15px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 10%,transparent)}
-.setting-panel,.security-option-card{border:1px solid var(--card-border);border-radius:21px;background:linear-gradient(145deg,var(--surface),color-mix(in srgb,var(--surface) 96%,var(--soft)));box-shadow:var(--card-shadow);padding:20px}
-.setting-panel>label:not(.check-row){font-size:12px;color:var(--ink);font-weight:800}
-.setting-panel input:not([type=checkbox]):not([type=range]),.setting-panel select{border-radius:13px;border-color:var(--card-border);background:var(--paper);min-height:46px}
-.setting-panel .check-row{padding:13px 5px;border-bottom:1px solid color-mix(in srgb,var(--line) 85%,transparent)}
-.security-option-card{margin-bottom:15px}
-.security-option-icon{border-radius:15px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 10%,transparent)}
-.security-state,.info-line,.message-box{border-radius:13px;background:var(--paper);padding:12px;border:1px solid var(--line)}
-.security-option-card .full-btn{min-height:45px}
-.backup-panel{padding:20px!important}
-.backup-hero{padding:5px 2px 15px;border-bottom:1px solid var(--line);margin-bottom:15px}
-.backup-hero-icon{border-radius:17px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 10%,transparent)}
-.backup-info{border:1px solid color-mix(in srgb,var(--accent) 12%,var(--line));border-radius:14px;background:color-mix(in srgb,var(--soft) 70%,var(--surface));line-height:1.9}
-.backup-choice{border-radius:17px;padding:14px;border-color:var(--card-border);box-shadow:0 3px 12px #30231a06}
-.backup-choice-primary{box-shadow:0 5px 15px color-mix(in srgb,var(--accent) 8%,transparent)}
-.backup-choice-icon{border-radius:14px}
-.backup-import-head{padding:12px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface) 80%,var(--soft))}
-.backup-panel .message-box{border:1px solid var(--line)}
-.trash-row{border:1px solid var(--card-border);border-radius:15px;padding:13px;background:color-mix(in srgb,var(--surface) 82%,var(--soft));box-shadow:0 3px 12px #30231a06}
-.trash-row .row{margin:0;gap:7px}
-.trash-row .btn{min-height:36px}
-.trash-confirm-sheet{border-radius:24px}
-.message-box{overflow-wrap:anywhere}
-:root[data-theme="dark"]{--card-border:color-mix(in srgb,var(--accent) 22%,var(--line));--card-shadow:0 8px 24px rgba(0,0,0,.18);--card-shadow-hover:0 16px 34px rgba(0,0,0,.3)}
-:root[data-theme="dark"] body{background:radial-gradient(ellipse at 8% 0%,#a33d2d12,transparent 35%),var(--paper)}
-:root[data-theme="dark"] .stat,:root[data-theme="dark"] .project-card,:root[data-theme="dark"] .settings-tile,:root[data-theme="dark"] .setting-panel,:root[data-theme="dark"] .security-option-card,:root[data-theme="dark"] .trash-row,:root[data-theme="dark"] .sheet{background:var(--surface)}
-:root[data-theme="dark"] .tag,:root[data-theme="dark"] .attachment,:root[data-theme="dark"] .selected-file,:root[data-theme="dark"] .identity-preview,:root[data-theme="dark"] .icon-picker,:root[data-theme="dark"] .backup-import-head{background:color-mix(in srgb,var(--surface) 82%,var(--soft));color:var(--ink)}
-:root[data-theme="dark"] .backup-info,:root[data-theme="dark"] .security-state,:root[data-theme="dark"] .info-line,:root[data-theme="dark"] .message-box,:root[data-theme="dark"] #projectDetails>p{background:var(--paper);color:var(--muted)}
-:root[data-theme="dark"] .backup-choice{background:var(--surface);color:var(--ink)}
-:root[data-theme="dark"] .backup-choice-primary{background:color-mix(in srgb,var(--surface) 88%,var(--accent) 12%)}
-:root[data-theme="dark"] .sheet input,:root[data-theme="dark"] .sheet textarea,:root[data-theme="dark"] .sheet select,:root[data-theme="dark"] .setting-panel input:not([type=checkbox]):not([type=range]),:root[data-theme="dark"] .setting-panel select{background:var(--paper);color:var(--ink)}
-:root[data-theme="dark"] .close,:root[data-theme="dark"] .attachment-actions button{background:var(--paper);color:var(--ink)}
-@media(max-width:760px){
- .app{padding-top:18px}.intro{gap:12px}.intro-main,.intro-side{border-radius:22px}.stats{gap:8px}.stat{min-height:84px;padding:13px 11px;border-radius:16px}.stat strong{font-size:25px}.stat small{font-size:10px}.stat-icon{width:35px;height:35px;border-radius:12px}
- .grid{gap:11px}.project-card{padding:18px 17px 16px;border-radius:19px}.project-card:hover{transform:none}.projtop{gap:11px;padding-inline-start:31px}.ico{width:48px;height:48px;border-radius:15px}.name{font-size:15px}.project-actions{gap:7px}.project-actions .btn{padding:9px 10px;min-height:42px}
- .section-head h2{font-size:22px}.settings-home{gap:10px}.settings-tile{border-radius:16px}.setting-panel,.security-option-card{padding:16px;border-radius:18px}.backup-panel{padding:15px!important}.trash-row{align-items:flex-start;flex-direction:column}.trash-row .row{width:100%}.trash-row .row .btn{flex:1}
- .sheet{border-radius:23px;padding:21px 17px}.settings-sheet{border-radius:23px}
-}
-@media(max-width:420px){.stats{grid-template-columns:1fr;gap:8px}.stat{min-height:72px}.stat strong{font-size:24px}.stat-icon{width:34px;height:34px}.project-actions .btn{font-size:11px}.nav{gap:2px;padding:6px}.nav button{padding:9px 12px;font-size:11px}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+/* Backup and import cards — NexaBox 4.3.5 */
+.backup-panel{padding:18px!important}.backup-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.backup-main-card{display:flex;align-items:center;gap:12px;min-width:0;text-align:right;padding:16px 14px;border:1px solid var(--line);border-radius:18px;background:var(--surface);color:var(--ink);box-shadow:0 6px 20px rgba(40,25,18,.045);transition:.18s}.backup-main-card:hover,.backup-main-card:focus-visible{transform:translateY(-2px);border-color:var(--accent2);box-shadow:var(--shadow);outline:none}.backup-main-icon{width:44px;height:44px;display:grid;place-items:center;flex:none;border-radius:14px;background:var(--soft);font-size:22px}.backup-main-copy{display:grid;gap:3px;flex:1;min-width:0}.backup-main-copy b{font-size:13px}.backup-main-copy small{font-size:10px;color:var(--muted);line-height:1.6}.backup-main-card>i{font-style:normal;font-size:23px;color:var(--accent)}.backup-create-card,.backup-import-card{margin-top:15px;padding:17px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--surface) 94%,var(--accent) 6%);box-shadow:0 7px 22px rgba(40,25,18,.045)}.backup-create-head{display:flex;align-items:center;gap:11px;margin-bottom:14px}.backup-create-head>div{display:grid;gap:2px;flex:1}.backup-create-head b{font-size:13px}.backup-create-head small{font-size:10px;color:var(--muted)}.backup-close{width:32px;height:32px;border:0;border-radius:10px;background:var(--soft);color:var(--accent);font-size:21px}.backup-create-card label{display:block;margin:12px 0 5px;font-size:11px;font-weight:800;color:var(--ink)}.backup-filename{width:100%;min-height:46px;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);direction:ltr;text-align:left;font-size:12px}.backup-location-row{display:flex;align-items:center;gap:10px;padding:11px;border:1px solid var(--line);border-radius:13px;background:var(--surface)}.backup-location-icon{width:37px;height:37px;display:grid;place-items:center;border-radius:11px;background:var(--soft);font-size:18px}.backup-location-copy{display:grid;gap:2px;flex:1;min-width:0}.backup-location-copy b{font-size:11px}.backup-location-copy small{font-size:10px;color:var(--muted);line-height:1.5}.backup-location-row .btn{font-size:11px;padding:8px 12px;white-space:nowrap}.backup-location-note{font-size:10px;line-height:1.7;color:var(--muted);margin:8px 2px 13px}.backup-create-card .full-btn,.backup-import-card .full-btn{width:100%;min-height:45px}.backup-import-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}.backup-import-head>span{width:40px;height:40px;display:grid;place-items:center;border-radius:12px;background:var(--soft);font-size:19px}.backup-import-head div{display:grid;gap:3px;flex:1}.backup-import-head b{font-size:12px}.backup-import-head small{font-size:10px;color:var(--muted);line-height:1.7}.backup-panel .message-box{line-height:1.8;overflow-wrap:anywhere;margin-top:12px;padding:9px 11px;border-radius:11px;background:var(--paper)}
+@media(max-width:520px){.backup-panel{padding:13px!important}.backup-cards-grid{grid-template-columns:1fr}.backup-main-card{padding:13px}.backup-create-card,.backup-import-card{padding:13px}.backup-location-row{gap:7px}.backup-location-row .btn{padding:7px 9px}}
 
 </style></head><body>
 <div class="app">
@@ -289,14 +187,21 @@ body{background:radial-gradient(ellipse at 8% 0%,color-mix(in srgb,var(--soft) 4
 </section>
 <section class="settings-page" data-page="general"><div class="setting-panel"><div class="info-line">◉ مساحة محلية خاصة · محفوظة على جهازك</div><label>اللغة</label><select id="prefLanguage"><option value="ar">العربية</option><option value="en">English</option></select><button class="btn soft full-btn" onclick="resetAppearance()">إعادة ضبط إعدادات المظهر فقط</button><div class="info-line" id="storageUsage">مساحة التخزين: جارٍ الحساب…</div></div></section>
 <section class="settings-page" data-page="backup"><div class="setting-panel backup-panel">
-<div class="backup-hero"><span class="backup-hero-icon">💾</span><div><h3>النسخ الاحتياطي</h3><p>احفظ نسخة من مشاريعك وملفاتك في المكان الذي تختاره.</p></div></div>
-<div class="backup-info">تتضمن النسخة بيانات المشاريع وأيقوناتها وصورها وجميع المرفقات. لن يتم حذف أي بيانات من NexaBox عند إنشاء النسخة أو استيرادها.</div>
-<div class="backup-destination-title">أين تريد حفظ النسخة؟</div>
-<button class="backup-choice backup-choice-primary" onclick="exportBackup(true)"><span class="backup-choice-icon">📁</span><span><b>اختيار مكان الحفظ</b><small>اختر المجلد واسم ملف النسخة من نافذة الحفظ، إذا كان جهازك يدعم ذلك.</small></span><i>‹</i></button>
-<button class="backup-choice" onclick="exportBackup(false)"><span class="backup-choice-icon">⬇</span><span><b>التنزيل المباشر</b><small>تنزيل النسخة إلى مجلد التنزيلات الافتراضي في جهازك.</small></span><i>‹</i></button>
-<div class="backup-divider"></div>
-<div class="backup-import-head"><span>📥</span><div><b>استيراد نسخة سابقة</b><small>دمج المشاريع من ملف NexaBox دون استبدال مشاريعك الحالية.</small></div></div>
-<button class="btn soft full-btn" onclick="$('backupPicker').click()">اختيار ملف النسخة للاستيراد</button><input id="backupPicker" type="file" accept=".json,.nexabox,application/json" hidden onchange="importBackup(event)">
+<div class="backup-cards-grid">
+<button class="backup-main-card" type="button" onclick="openBackupCreateCard()"><span class="backup-main-icon">💾</span><span class="backup-main-copy"><b>النسخ الاحتياطي</b><small>إنشاء نسخة من مشاريعك وملفاتك</small></span><i>‹</i></button>
+<button class="backup-main-card" type="button" onclick="$('backupPicker').click()"><span class="backup-main-icon">📥</span><span class="backup-main-copy"><b>استيراد نسخة</b><small>اختيار نسخة محفوظة واستعادة مشاريعها</small></span><i>‹</i></button>
+</div>
+<div id="backupCreateCard" class="backup-create-card hidden">
+<div class="backup-create-head"><span class="backup-main-icon">💾</span><div><b>إعداد النسخة الاحتياطية</b><small>حدد اسم الملف ومكان تنزيله.</small></div><button class="backup-close" type="button" onclick="closeBackupCreateCard()" aria-label="إغلاق">×</button></div>
+<label for="backupFilename">اسم ملف النسخة</label>
+<input id="backupFilename" class="backup-filename" type="text" inputmode="text" autocomplete="off" spellcheck="false">
+<label>مكان التنزيل</label>
+<div class="backup-location-row"><span class="backup-location-icon">📁</span><div class="backup-location-copy"><b id="backupLocationTitle">التنزيلات</b><small id="backupLocationHint">المجلد الافتراضي في جهازك</small></div><button class="btn soft" type="button" onclick="chooseBackupLocation()">تغيير</button></div>
+<div class="backup-location-note">عند اختيار مكان آخر، سيفتح مستعرض الملفات لحفظ النسخة بالاسم المحدد. قد لا يعرض النظام المسار الكامل للتطبيق.</div>
+<button id="createBackupBtn" class="btn primary full-btn" type="button" onclick="exportBackup()">إنشاء النسخة الاحتياطية</button>
+</div>
+<div class="backup-import-card"><div class="backup-import-head"><span>📥</span><div><b>استيراد نسخة احتياطية</b><small>اختر ملف NexaBox محفوظاً على جهازك لدمج مشاريعه دون استبدال المشاريع الحالية.</small></div></div><button class="btn soft full-btn" type="button" onclick="$('backupPicker').click()">اختيار ملف للاستيراد</button></div>
+<input id="backupPicker" type="file" accept=".json,.nexabox,application/json" hidden onchange="importBackup(event)">
 <div id="backupMessage" class="muted message-box" aria-live="polite">لم يتم إنشاء أو استيراد نسخة بعد.</div>
 </div></section>
 <section class="settings-page" data-page="trash"><div class="setting-panel"><div id="trashList" class="muted">لا توجد عناصر محذوفة.</div><button class="btn danger full-btn" onclick="emptyTrash()">حذف جميع العناصر نهائياً</button></div></section>
@@ -418,16 +323,23 @@ async function resetAppearance(){if(!confirm('إعادة ضبط المظهر و�
 // النسخ الاحتياطي: JSON ذاتي الاحتواء يشمل بيانات المشاريع وكل المرفقات الثنائية.
 async function blobToBase64(blob){if(!blob)return '';const bytes=new Uint8Array(await blob.arrayBuffer());let binary='';const chunk=0x8000;for(let i=0;i<bytes.length;i+=chunk)binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));return btoa(binary)}
 function base64ToBlob(data,type){const binary=atob(data||'');const bytes=new Uint8Array(binary.length);for(let i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);return new Blob([bytes],{type:type||'application/octet-stream'})}
-async function exportBackup(chooseLocation=true){const message=$('backupMessage');let fileHandle=null;try{
-if(chooseLocation&&typeof window.showSaveFilePicker==='function'){
- fileHandle=await window.showSaveFilePicker({suggestedName:'NexaBox-Backup-'+new Date().toISOString().slice(0,10)+'.nexabox.json',types:[{description:'نسخة NexaBox الاحتياطية',accept:{'application/json':['.json','.nexabox']}}]});
-}else if(chooseLocation){message.textContent='جهازك لا يدعم نافذة اختيار مكان الحفظ؛ سيتم استخدام التنزيل المباشر إلى مجلد التنزيلات.';}
-message.textContent='جارٍ تجهيز النسخة الاحتياطية…';const projects=await req('readonly',s=>s.getAll());const payload={format:'NexaBox-Backup',backupVersion:1,appVersion:'4.3.5',createdAt:new Date().toISOString(),projectCount:projects.length,projects:[]};
+let backupLocationMode='downloads';
+function backupDateStamp(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function defaultBackupFilename(){return 'NexaBox-Backup-'+backupDateStamp()+'.nexabox.json'}
+function openBackupCreateCard(){const card=$('backupCreateCard');card.classList.remove('hidden');if(!$('backupFilename').value.trim())$('backupFilename').value=defaultBackupFilename();$('backupLocationTitle').textContent=backupLocationMode==='custom'?'المكان الذي تختاره':'التنزيلات';$('backupLocationHint').textContent=backupLocationMode==='custom'?'سيظهر مستعرض الملفات عند إنشاء النسخة':'المجلد الافتراضي في جهازك';card.scrollIntoView({behavior:'smooth',block:'nearest'})}
+function closeBackupCreateCard(){$('backupCreateCard').classList.add('hidden')}
+function chooseBackupLocation(){backupLocationMode='custom';$('backupLocationTitle').textContent='المكان الذي تختاره';$('backupLocationHint').textContent='سيُفتح مستعرض الملفات عند إنشاء النسخة';$('backupMessage').textContent='تم اختيار الحفظ في مكان آخر. اضغط «إنشاء النسخة الاحتياطية» ثم اختر المكان من مستعرض الملفات.'}
+function safeBackupFilename(){let name=($('backupFilename')?.value||'').trim()||defaultBackupFilename();name=name.replace(/[\\/:*?"<>|]/g,'-').replace(/\s+/g,' ').trim();if(!name.toLowerCase().endsWith('.json')&&!name.toLowerCase().endsWith('.nexabox'))name+='.nexabox.json';return name}
+async function exportBackup(){const message=$('backupMessage'),button=$('createBackupBtn');let fileHandle=null;try{
+const filename=safeBackupFilename();if(backupLocationMode==='custom'&&typeof window.showSaveFilePicker==='function'){
+ fileHandle=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'نسخة NexaBox الاحتياطية',accept:{'application/json':['.json','.nexabox']}}]});
+}
+button.disabled=true;button.textContent='جارٍ تجهيز النسخة…';message.textContent='جارٍ تجهيز النسخة الاحتياطية وملفات المشاريع…';const projects=await req('readonly',s=>s.getAll());const payload={format:'NexaBox-Backup',backupVersion:1,appVersion:'4.3.5',createdAt:new Date().toISOString(),projectCount:projects.length,projects:[]};
 for(const project of projects){const copy={...project,attachments:[]};for(const file of (project.attachments||[])){const {blob,data,...meta}=file;const content=blob instanceof Blob?blob:(data instanceof ArrayBuffer||ArrayBuffer.isView(data)?new Blob([data],{type:file.type||'application/octet-stream'}):null);copy.attachments.push({...meta,blobBase64:await blobToBase64(content),blobType:content?.type||file.type||'application/octet-stream'})}payload.projects.push(copy)}
-const data=new Blob([JSON.stringify(payload)],{type:'application/json'});const filename='NexaBox-Backup-'+new Date().toISOString().slice(0,10)+'.nexabox.json';
-if(fileHandle){const writable=await fileHandle.createWritable();await writable.write(data);await writable.close();message.textContent='تم حفظ النسخة في المكان الذي اخترته بنجاح. عدد المشاريع: '+projects.length;}
-else{const url=URL.createObjectURL(data);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);message.textContent='تم تجهيز النسخة وبدء تنزيلها. '+(chooseLocation?'قد لا يدعم جهازك اختيار مجلد مخصص؛ تحقق من مجلد التنزيلات. ':'')+'عدد المشاريع: '+projects.length;}
-}catch(error){if(error?.name==='AbortError'){message.textContent='تم إلغاء اختيار مكان الحفظ، ولم يتم إنشاء ملف.';return}console.error(error);message.textContent='تعذر إنشاء النسخة الاحتياطية: '+(error.message||'خطأ غير معروف')}}
+const data=new Blob([JSON.stringify(payload)],{type:'application/json'});
+if(fileHandle){const writable=await fileHandle.createWritable();await writable.write(data);await writable.close();$('backupLocationTitle').textContent='تم الحفظ في المكان الذي اخترته';$('backupLocationHint').textContent='الملف: '+fileHandle.name;message.textContent='تم حفظ اختيار الملف وإنشاء النسخة الاحتياطية بنجاح. عدد المشاريع: '+projects.length;backupLocationMode='downloads';}
+else{const url=URL.createObjectURL(data);const a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);$('backupLocationTitle').textContent='التنزيلات';$('backupLocationHint').textContent='تم بدء تنزيل: '+filename;message.textContent='تم إنشاء النسخة وبدء تنزيلها إلى مجلد التنزيلات في جهازك. عدد المشاريع: '+projects.length;if(backupLocationMode==='custom'){message.textContent+=' متصفحك لا يدعم اختيار موقع مخصص؛ استخدم مجلد التنزيلات.';backupLocationMode='downloads';}}
+}catch(error){if(error?.name==='AbortError'){message.textContent='تم إلغاء اختيار مكان الحفظ، ولم يتم إنشاء ملف.';return}console.error(error);message.textContent='تعذر إنشاء النسخة الاحتياطية: '+(error.message||'خطأ غير معروف')}finally{button.disabled=false;button.textContent='إنشاء النسخة الاحتياطية'}}
 async function importBackup(event){const file=event.target.files?.[0];if(!file)return;const message=$('backupMessage');try{message.textContent='جارٍ فحص النسخة الاحتياطية…';if(file.size>500*1024*1024)throw new Error('حجم الملف أكبر من الحد المسموح (500 ميجابايت).');const payload=JSON.parse(await file.text());if(payload.format!=='NexaBox-Backup'||!Array.isArray(payload.projects))throw new Error('ملف النسخة الاحتياطية غير صالح أو غير مدعوم.');const existing=await req('readonly',s=>s.getAll());const used=new Set(existing.map(p=>String(p.id)));const imported=[];for(const source of payload.projects){if(!source||typeof source!=='object'||!source.name)continue;const project={...source,id:used.has(String(source.id))?makeId():String(source.id||makeId())};used.add(project.id);project.attachments=[];for(const fileData of (Array.isArray(source.attachments)?source.attachments:[])){const {blobBase64,blobType,...meta}=fileData;const blob=typeof blobBase64==='string'?base64ToBlob(blobBase64,blobType||meta.type):new Blob([],{type:meta.type||'application/octet-stream'});project.attachments.push({...meta,id:makeId(),data:await blob.arrayBuffer(),size:meta.size??blob.size})}imported.push(project)}if(!imported.length)throw new Error('لا توجد مشاريع صالحة للاستيراد في هذا الملف.');if(!confirm('سيتم دمج '+imported.length+' مشروعاً مع مشاريعك الحالية. لن يتم حذف أو استبدال أي مشروع موجود. متابعة؟')){message.textContent='تم إلغاء الاستيراد.';return}await new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');for(const project of imported)tx.objectStore(STORE).add(project);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('تعذر إتمام الاستيراد'))});await load();message.textContent='تم استيراد '+imported.length+' مشروعاً ودمجها بنجاح. لم تُحذف أي بيانات موجودة.'}catch(error){console.error(error);message.textContent='فشل الاستيراد: '+(error.message||'تعذر قراءة الملف')}finally{event.target.value=''}}
 async function estimateStorage(){let total=0;try{const estimate=await navigator.storage?.estimate();total=estimate?.usage||0}catch(e){}$('storageUsage').textContent='مساحة التخزين المستخدمة تقريباً: '+formatSize(total)}
 
