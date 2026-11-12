@@ -171,8 +171,25 @@
 @media(prefers-reduced-motion:reduce){.splash-inner,.splash-loader span{animation:none}#nexaSplash{transition:none}}
 @media(max-width:480px){.splash-loader{margin-top:28px}}
 
-.workspace-summary{gap:14px;justify-content:center}.summary-title{font-size:17px;font-weight:800;color:#fff}.summary-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.summary-metric{display:flex;flex-direction:column;gap:5px;padding:0;border:0;border-radius:0;background:transparent;min-width:0}.summary-metric small{font-size:11px;color:#f7e4de;line-height:1.5}.summary-metric strong{font:800 29px/1.2 Manrope,sans-serif;color:#fff;direction:ltr;text-align:right}
-@media(max-width:480px){.summary-metrics{gap:7px}.summary-metric{padding:0}.summary-metric small{font-size:10px}.summary-metric strong{font-size:25px}.summary-title{font-size:16px}}
+/* NexaBox — refined workspace summary card */
+.intro-side.workspace-summary{position:relative;isolation:isolate;overflow:hidden;gap:18px;justify-content:center;min-height:220px;padding:25px 25px 22px;background:linear-gradient(145deg,#fbf8f2 0%,#f5f1e9 100%);border:1px solid rgba(163,61,45,.16);box-shadow:0 12px 30px rgba(52,35,25,.07);color:#342923}
+.workspace-summary:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,#A33D2D,#c77b68);z-index:-1}
+.workspace-summary:after{content:"";position:absolute;width:170px;height:170px;border:1px solid rgba(163,61,45,.09);border-radius:50%;left:-86px;bottom:-108px;z-index:-1}
+.summary-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:#633126;letter-spacing:.1px}
+.summary-title:before{content:"";width:8px;height:8px;border-radius:50%;background:#A33D2D;box-shadow:0 0 0 5px rgba(163,61,45,.10)}
+.summary-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;align-items:stretch}
+.summary-metric{display:flex;flex-direction:column;justify-content:center;gap:8px;min-width:0;padding:7px 13px 5px;border:0;border-left:1px solid rgba(99,49,38,.15);border-radius:0;background:transparent;text-align:right}
+.summary-metric:first-child{padding-right:0}
+.summary-metric:last-child{border-left:0;padding-left:0}
+.summary-metric small{font-size:11px;font-weight:600;color:#78665d;line-height:1.5;white-space:normal}
+.summary-metric strong{font:800 34px/1 Manrope,'IBM Plex Sans Arabic',sans-serif;color:#A33D2D;direction:ltr;text-align:right;font-variant-numeric:tabular-nums}
+:root[data-theme="dark"] .intro-side.workspace-summary{background:linear-gradient(145deg,#292725,#242321);border-color:rgba(219,145,124,.24);box-shadow:0 12px 30px rgba(0,0,0,.18);color:#f5f1e9}
+:root[data-theme="dark"] .summary-title{color:#f2d6cc}
+:root[data-theme="dark"] .summary-metric{border-left-color:rgba(245,241,233,.15)}
+:root[data-theme="dark"] .summary-metric small{color:#c9bdb4}
+:root[data-theme="dark"] .summary-metric strong{color:#e3a18f}
+@media(max-width:760px){.intro-side.workspace-summary{min-height:142px;padding:19px 20px;gap:14px}}
+@media(max-width:480px){.summary-title{font-size:15px}.summary-metrics{gap:0}.summary-metric{padding:6px 9px 4px;gap:7px}.summary-metric:first-child{padding-right:0}.summary-metric:last-child{padding-left:0}.summary-metric small{font-size:10px;line-height:1.45}.summary-metric strong{font-size:28px}}
 </style></head><body>
 <div id="nexaSplash" aria-hidden="true"><div class="splash-inner"><p class="splash-tagline">مساحتك الخاصة لتنظيم مشاريعك</p><div class="splash-loader" aria-hidden="true"><span></span><span></span><span></span></div><div class="splash-caption">YOUR WORKSPACE</div></div></div>
 <div class="app">
