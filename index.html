@@ -200,7 +200,6 @@
 <div class="backup-location-note">عند اختيار مكان آخر، سيفتح مستعرض الملفات لحفظ النسخة بالاسم المحدد. قد لا يعرض النظام المسار الكامل للتطبيق.</div>
 <button id="createBackupBtn" class="btn primary full-btn" type="button" onclick="exportBackup()">إنشاء النسخة الاحتياطية</button>
 </div>
-<div class="backup-import-card"><div class="backup-import-head"><span>📥</span><div><b>استيراد نسخة احتياطية</b><small>اختر ملف NexaBox محفوظاً على جهازك لدمج مشاريعه دون استبدال المشاريع الحالية.</small></div></div><button class="btn soft full-btn" type="button" onclick="$('backupPicker').click()">اختيار ملف للاستيراد</button></div>
 <input id="backupPicker" type="file" accept=".json,.nexabox,application/json" hidden onchange="importBackup(event)">
 <div id="backupMessage" class="muted message-box" aria-live="polite">لم يتم إنشاء أو استيراد نسخة بعد.</div>
 </div></section>
