@@ -1,1 +1,16 @@
-{"name":"NexaBox","short_name":"NexaBox","start_url":"./","display":"standalone","background_color":"#f5f1e9","theme_color":"#0a0f1d","icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "NexaBox",
+  "short_name": "NexaBox",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F5F1E9",
+  "theme_color": "#A33D2D",
+  "icons": [
+    {
+      "src": "assets/nexabox-app-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
