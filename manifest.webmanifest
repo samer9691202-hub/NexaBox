@@ -1,11 +1,11 @@
 {
-  "name": "مساحة العمل",
-  "short_name": "مساحتي",
-  "description": "مساحة إنتاجية عربية لإدارة المهام والملاحظات",
+  "name": "MADAR | مدار",
+  "short_name": "MADAR",
+  "description": "MADAR — مساحة عربية لتنظيم المهام والملاحظات والتذكيرات",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#141E19",
-  "theme_color": "#202F27",
+  "background_color": "#191A1B",
+  "theme_color": "#191A1B",
   "lang": "ar",
   "dir": "rtl",
   "icons": [

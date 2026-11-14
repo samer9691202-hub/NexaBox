@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#E3DAC9">
-  <meta name="description" content="مساحة إنتاجية عربية لإدارة المهام والملاحظات والتذكيرات">
-  <title>مساحة العمل</title>
+  <meta name="theme-color" content="#191A1B">
+  <meta name="description" content="MADAR — مساحة عربية لتنظيم المهام والملاحظات والتذكيرات">
+  <title>MADAR | مدار</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
@@ -14,7 +14,7 @@
 <body>
   <div id="lockScreen" class="lock-screen hidden">
     <div class="lock-card">
-      <div class="brand-mark large">✦</div>
+      <img class="brand-logo brand-logo-large" src="assets/madar-logo.png" alt="MADAR">
       <h1>مرحباً بعودتك</h1>
       <p>أدخل رمز PIN لفتح مساحة العمل</p>
       <input id="unlockPin" class="pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" aria-label="رمز PIN">
@@ -27,8 +27,8 @@
     <button class="sidebar-backdrop" id="sidebarBackdrop" aria-label="إغلاق القائمة"></button>
     <aside class="sidebar" id="sidebar" aria-label="القائمة الجانبية">
       <div class="brand">
-        <div class="brand-mark">✦</div>
-        <div class="brand-name">مساحة العمل<span>خطط بهدوء، وأنجز بوضوح</span></div>
+        <img class="brand-logo" src="assets/madar-logo.png" alt="MADAR">
+        <div class="brand-name">MADAR<span>خطط بهدوء، وأنجز بوضوح</span></div>
         <div class="sidebar-controls"><button class="icon-btn collapse-btn" id="collapseSidebar" type="button" aria-label="طي القائمة" aria-expanded="true" title="طي القائمة">‹</button><button class="icon-btn sidebar-close" id="closeSidebar" type="button" aria-label="إغلاق القائمة">×</button></div>
       </div>
       <nav class="main-nav" aria-label="التنقل الرئيسي">
@@ -43,7 +43,7 @@
         <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span><span>الإعدادات</span></button>
       </nav>
       <div class="sidebar-bottom">
-        <div class="mini-profile"><div class="avatar">م</div><div><strong>مساحة شخصية</strong><small>بياناتك على هذا الجهاز</small></div></div>
+        <div class="mini-profile"><div class="avatar">م</div><div><strong>MADAR</strong><small>بياناتك على هذا الجهاز</small></div></div>
         <div class="sidebar-foot">نسخة محلية · تعمل دون إنترنت</div>
       </div>
     </aside>
@@ -51,9 +51,9 @@
     <main class="main-area">
       <header class="topbar">
         <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="فتح القائمة" aria-controls="sidebar" aria-expanded="false">☰</button>
-        <div class="breadcrumb"><span>مساحة العمل</span><b>/</b><strong id="pageTitle">الرئيسية</strong></div>
+        <div class="breadcrumb"><span>MADAR</span><b>/</b><strong id="pageTitle">الرئيسية</strong></div>
         <div class="top-actions">
-          <label class="search-box"><span>⌕</span><input id="globalSearch" type="search" placeholder="ابحث في مساحة العمل"></label>
+          <label class="search-box"><span>⌕</span><input id="globalSearch" type="search" placeholder="ابحث في MADAR"></label>
           <button class="icon-btn" id="quickAdd" title="إضافة سريعة">＋</button>
           <button class="icon-btn" id="themeToggle" title="تبديل المظهر">☾</button>
           <div class="connection-pill"><i></i><span id="connectionText">محلي</span></div>
