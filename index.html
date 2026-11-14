@@ -7,14 +7,15 @@
   <meta name="description" content="MADAR — مساحة عربية لتنظيم المهام والملاحظات والتذكيرات">
   <title>MADAR | مدار</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="assets/icon-192.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="icon" href="./assets/icon-192.png" type="image/png">
+  <link rel="preload" as="image" href="./assets/madar-logo.png">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div id="lockScreen" class="lock-screen hidden">
     <div class="lock-card">
-      <img class="brand-logo brand-logo-large" src="assets/madar-logo.png" alt="MADAR">
+      <img class="brand-logo brand-logo-large" src="./assets/madar-logo.png" alt="MADAR" width="1344" height="172" decoding="async" onerror="this.onerror=null;this.src='./assets/madar-logo-original.png';">
       <h1>مرحباً بعودتك</h1>
       <p>أدخل رمز PIN لفتح مساحة العمل</p>
       <input id="unlockPin" class="pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" aria-label="رمز PIN">
@@ -27,7 +28,7 @@
     <button class="sidebar-backdrop" id="sidebarBackdrop" aria-label="إغلاق القائمة"></button>
     <aside class="sidebar" id="sidebar" aria-label="القائمة الجانبية">
       <div class="brand">
-        <img class="brand-logo" src="assets/madar-logo.png" alt="MADAR">
+        <img class="brand-logo" src="./assets/madar-logo.png" alt="MADAR" width="1344" height="172" decoding="async" onerror="this.onerror=null;this.src='./assets/madar-logo-original.png';">
         <div class="brand-name">MADAR<span>خطط بهدوء، وأنجز بوضوح</span></div>
         <div class="sidebar-controls"><button class="icon-btn collapse-btn" id="collapseSidebar" type="button" aria-label="طي القائمة" aria-expanded="true" title="طي القائمة">‹</button><button class="icon-btn sidebar-close" id="closeSidebar" type="button" aria-label="إغلاق القائمة">×</button></div>
       </div>
@@ -163,7 +164,7 @@
           <button class="settings-back" id="settingsBack"><span>›</span> كل الإعدادات</button>
           <div class="settings-detail-heading"><div class="settings-detail-icon" id="settingsDetailIcon">◐</div><div><h2 id="settingsDetailTitle">المظهر والشاشة</h2><p id="settingsDetailDescription">خصص طريقة عرض التطبيق.</p></div></div>
           <section class="panel settings-section settings-detail-panel" data-settings-panel="appearance"><div class="settings-panel-title">تخصيص العرض</div><p>اختر المظهر والتنسيقات التي تناسبك.</p><div class="setting-row"><div><strong>نمط العرض</strong><small>فاتح أو داكن أو حسب إعدادات الجهاز</small></div><select id="themeSelect"><option value="light">فاتح</option><option value="dark">داكن</option><option value="system">تلقائي</option></select></div><div class="setting-row"><div><strong>بداية الأسبوع</strong><small>اليوم الأول في التقويم</small></div><select id="weekStart"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option></select></div><div class="setting-row"><div><strong>تنسيق الساعة</strong><small>طريقة عرض الوقت</small></div><select id="timeFormat"><option value="12">12 ساعة</option><option value="24">24 ساعة</option></select></div><div class="setting-row"><div><strong>إظهار الثواني</strong><small>إظهار الثواني في الساعة الرئيسية</small></div><input type="checkbox" id="showSeconds"></div></section>
-          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="storage"><div class="settings-panel-title">البيانات والنسخ الاحتياطي</div><p>احتفظ بنسخة من بياناتك أو استعد نسخة سابقة.</p><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تنزيل نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد نسخة JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden><button class="secondary-btn" id="encryptedExport">نسخة احتياطية مشفرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفرة</button><input type="file" id="encryptedFile" accept=".enc,application/octet-stream" hidden></div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي نشط</small></div><span class="status-dot">نشط</span></div></section>
+          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="storage"><div class="settings-panel-title">البيانات والنسخ الاحتياطي</div><p>صدّر بياناتك للاحتفاظ بها، أو استعد نسخة سابقة على هذا الجهاز.</p><div class="backup-action-group"><strong>نسخة عادية</strong><small>ملف JSON يمكنك نقله وفتحه، دون كلمة مرور.</small><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تصدير نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد ملف JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden></div></div><div class="backup-action-group"><strong>نسخة مشفّرة</strong><small>حماية بكلمة مرور باستخدام AES-256. استخدم كلمة المرور نفسها عند الاستعادة.</small><div class="setting-actions"><button class="secondary-btn" id="encryptedExport">تصدير نسخة مشفّرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفّرة</button><input type="file" id="encryptedFile" accept=".enc,.madar.enc,application/octet-stream,application/json" hidden></div></div><div class="backup-warning">عند الاستيراد اختر الدمج لإضافة العناصر الجديدة دون تكرار (مع الاحتفاظ بالبيانات الحالية)، أو الاستبدال لاستعادة النسخة بالكامل. يُنصح بتصدير نسخة احتياطية قبل الاستيراد. التشفير يتطلب تشغيل التطبيق عبر HTTPS أو localhost.</div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي على هذا الجهاز</small></div><span class="status-dot">نشط</span></div></section>
           <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="security"><div class="settings-panel-title">الأمان والخصوصية</div><p>أضف طبقة حماية محلية لمساحة العمل على هذا الجهاز.</p><div class="setting-row"><div><strong>رمز PIN</strong><small>استخدم رمزاً من 4 إلى 8 أرقام</small></div><button class="secondary-btn" id="setPinBtn">إعداد / تغيير PIN</button></div><div class="setting-row"><div><strong>قفل التطبيق</strong><small>قفل مساحة العمل الآن</small></div><button class="secondary-btn" id="lockNowBtn">قفل الآن</button></div><div class="setting-row"><div><strong>إزالة رمز PIN</strong><small>تعطيل القفل المحلي</small></div><button class="danger-btn" id="removePinBtn">إزالة PIN</button></div></section>
           <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="advanced"><div class="settings-panel-title">إعدادات متقدمة</div><p>إجراءات تؤثر على بيانات مساحة العمل. تأكد قبل المتابعة.</p><div class="setting-row danger-setting"><div><strong>مسح جميع البيانات</strong><small>حذف المهام والملاحظات والعناصر والتذكيرات نهائياً</small></div><button class="danger-btn" id="clearDataBtn">مسح البيانات</button></div></section>
         </div>

@@ -708,3 +708,6 @@ body.dark #page-home .welcome-time strong{color:#D8BD83!important}
   #page-home .welcome-time strong{font-size:22px}
   #page-home .welcome-card h1{font-size:22px!important}
 }
+
+/* Backup and restore panel */
+.backup-action-group{padding:14px 0 5px;border-top:1px solid var(--line)}.backup-action-group>strong,.backup-action-group>small{display:block}.backup-action-group>strong{font-size:12px}.backup-action-group>small{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.7}.backup-action-group .setting-actions{margin:10px 0 5px}.backup-warning{padding:12px 14px;margin:12px 0;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:10px;line-height:1.8}
