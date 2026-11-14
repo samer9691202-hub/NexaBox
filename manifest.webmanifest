@@ -4,8 +4,8 @@
   "description": "مساحة إنتاجية عربية لإدارة المهام والملاحظات",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#e9e7ef",
-  "theme_color": "#e9e7ef",
+  "background_color": "#141E19",
+  "theme_color": "#202F27",
   "lang": "ar",
   "dir": "rtl",
   "icons": [

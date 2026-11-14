@@ -24,11 +24,12 @@
   </div>
 
   <div class="app-shell">
-    <aside class="sidebar" id="sidebar">
+    <button class="sidebar-backdrop" id="sidebarBackdrop" aria-label="إغلاق القائمة"></button>
+    <aside class="sidebar" id="sidebar" aria-label="القائمة الجانبية">
       <div class="brand">
         <div class="brand-mark">✦</div>
         <div class="brand-name">مساحة العمل<span>خطط بهدوء، وأنجز بوضوح</span></div>
-        <button class="icon-btn collapse-btn" id="collapseSidebar" title="طي القائمة">‹</button>
+        <div class="sidebar-controls"><button class="icon-btn collapse-btn" id="collapseSidebar" type="button" aria-label="طي القائمة" aria-expanded="true" title="طي القائمة">‹</button><button class="icon-btn sidebar-close" id="closeSidebar" type="button" aria-label="إغلاق القائمة">×</button></div>
       </div>
       <nav class="main-nav" aria-label="التنقل الرئيسي">
         <button class="nav-item active" data-page="home"><span class="nav-icon">⌂</span><span>الرئيسية</span></button>
@@ -49,7 +50,7 @@
 
     <main class="main-area">
       <header class="topbar">
-        <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="القائمة">☰</button>
+        <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="فتح القائمة" aria-controls="sidebar" aria-expanded="false">☰</button>
         <div class="breadcrumb"><span>مساحة العمل</span><b>/</b><strong id="pageTitle">الرئيسية</strong></div>
         <div class="top-actions">
           <label class="search-box"><span>⌕</span><input id="globalSearch" type="search" placeholder="ابحث في مساحة العمل"></label>
@@ -146,13 +147,29 @@
       </section>
 
       <section class="page" id="page-settings">
-        <div class="page-intro"><div><div class="eyebrow">كما تحبها تماماً</div><h1>الإعدادات</h1><p>تحكم في المظهر وبياناتك وخصوصيتك.</p></div></div>
-        <div class="settings-layout">
-          <section class="panel settings-section"><h2>المظهر</h2><p>اختر المظهر المناسب لك.</p><div class="setting-row"><div><strong>نمط العرض</strong><small>فاتح أو داكن أو حسب الجهاز</small></div><select id="themeSelect"><option value="light">فاتح</option><option value="dark">داكن</option><option value="system">تلقائي</option></select></div><div class="setting-row"><div><strong>بداية الأسبوع</strong><small>اليوم الأول في التقويم</small></div><select id="weekStart"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option></select></div><div class="setting-row"><div><strong>تنسيق الساعة</strong><small>طريقة عرض الوقت</small></div><select id="timeFormat"><option value="12">12 ساعة</option><option value="24">24 ساعة</option></select></div><div class="setting-row"><div><strong>إظهار الثواني</strong><small>إظهار الثواني في الساعة</small></div><input type="checkbox" id="showSeconds"></div></section>
-          <section class="panel settings-section"><h2>البيانات والنسخ الاحتياطي</h2><p>بياناتك محفوظة محلياً على هذا الجهاز.</p><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تنزيل نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد نسخة JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden><button class="secondary-btn" id="encryptedExport">نسخة احتياطية مشفرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفرة</button><input type="file" id="encryptedFile" accept=".enc,application/octet-stream" hidden></div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي نشط</small></div><span class="status-dot">نشط</span></div></section>
-          <section class="panel settings-section"><h2>الحماية</h2><p>أضف قفلاً محلياً إلى مساحة العمل على هذا الجهاز.</p><div class="setting-row"><div><strong>رمز PIN</strong><small>استخدم رمزاً من 4 إلى 8 أرقام</small></div><button class="secondary-btn" id="setPinBtn">إعداد / تغيير PIN</button></div><div class="setting-row"><div><strong>قفل التطبيق</strong><small>قفل مساحة العمل الآن</small></div><button class="secondary-btn" id="lockNowBtn">قفل الآن</button></div><div class="setting-row"><div><strong>إزالة رمز PIN</strong><small>تعطيل القفل المحلي</small></div><button class="danger-btn" id="removePinBtn">إزالة PIN</button></div></section>
-          <section class="panel settings-section danger-zone"><h2>منطقة الإجراءات الحساسة</h2><p>هذه الإجراءات لا يمكن التراجع عنها.</p><button class="danger-btn" id="clearDataBtn">مسح جميع البيانات</button></section>
-          <div class="version-note">مساحة العمل · الإصدار 1.0.0 · تعمل بياناتك على جهازك</div>
+        <div class="page-intro settings-intro"><div><div class="eyebrow">تحكم كامل بمساحة عملك</div><h1>الإعدادات</h1><p>إدارة المظهر والتفضيلات والخصوصية والبيانات، بأسلوب إعدادات الهاتف.</p></div></div>
+        <div id="settingsHome" class="settings-home">
+          <div class="settings-search"><span>⌕</span><input id="settingsSearch" type="search" placeholder="ابحث في الإعدادات" aria-label="ابحث في الإعدادات"></div>
+          <section class="settings-group"><div class="settings-group-title">التفضيلات</div>
+            <button class="settings-link" data-settings-open="appearance"><span class="settings-symbol appearance-symbol">◐</span><span class="settings-link-copy"><strong>المظهر والشاشة</strong><small>الألوان، نمط العرض، إعدادات الوقت والتقويم</small></span><span class="settings-chevron">‹</span></button>
+          </section>
+          <section class="settings-group"><div class="settings-group-title">إدارة الجهاز والبيانات</div>
+            <button class="settings-link" data-settings-open="storage"><span class="settings-symbol storage-symbol">▣</span><span class="settings-link-copy"><strong>البيانات والنسخ الاحتياطي</strong><small>استيراد وتصدير وحالة التخزين</small></span><span class="settings-chevron">‹</span></button>
+            <button class="settings-link" data-settings-open="security"><span class="settings-symbol security-symbol">♢</span><span class="settings-link-copy"><strong>الأمان والخصوصية</strong><small>رمز PIN وقفل مساحة العمل</small></span><span class="settings-chevron">‹</span></button>
+          </section>
+          <section class="settings-group"><div class="settings-group-title">إدارة مساحة العمل</div>
+            <button class="settings-link" data-settings-open="advanced"><span class="settings-symbol advanced-symbol">⚙</span><span class="settings-link-copy"><strong>إعدادات متقدمة</strong><small>إجراءات إعادة التعيين وإدارة البيانات</small></span><span class="settings-chevron">‹</span></button>
+          </section>
+          <div class="settings-device-note"><span>✦</span><div><strong>مساحة عملك، بإعداداتك</strong><small>تُحفظ تفضيلاتك وبياناتك محلياً على هذا الجهاز.</small></div></div>
+          <div class="version-note">مساحة العمل · الإصدار 1.0.0</div>
+        </div>
+        <div id="settingsDetail" class="settings-detail hidden">
+          <button class="settings-back" id="settingsBack"><span>›</span> كل الإعدادات</button>
+          <div class="settings-detail-heading"><div class="settings-detail-icon" id="settingsDetailIcon">◐</div><div><h2 id="settingsDetailTitle">المظهر والشاشة</h2><p id="settingsDetailDescription">خصص طريقة عرض التطبيق.</p></div></div>
+          <section class="panel settings-section settings-detail-panel" data-settings-panel="appearance"><div class="settings-panel-title">تخصيص العرض</div><p>اختر المظهر والتنسيقات التي تناسبك.</p><div class="setting-row"><div><strong>نمط العرض</strong><small>فاتح أو داكن أو حسب إعدادات الجهاز</small></div><select id="themeSelect"><option value="light">فاتح</option><option value="dark">داكن</option><option value="system">تلقائي</option></select></div><div class="setting-row"><div><strong>بداية الأسبوع</strong><small>اليوم الأول في التقويم</small></div><select id="weekStart"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option></select></div><div class="setting-row"><div><strong>تنسيق الساعة</strong><small>طريقة عرض الوقت</small></div><select id="timeFormat"><option value="12">12 ساعة</option><option value="24">24 ساعة</option></select></div><div class="setting-row"><div><strong>إظهار الثواني</strong><small>إظهار الثواني في الساعة الرئيسية</small></div><input type="checkbox" id="showSeconds"></div></section>
+          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="storage"><div class="settings-panel-title">البيانات والنسخ الاحتياطي</div><p>احتفظ بنسخة من بياناتك أو استعد نسخة سابقة.</p><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تنزيل نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد نسخة JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden><button class="secondary-btn" id="encryptedExport">نسخة احتياطية مشفرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفرة</button><input type="file" id="encryptedFile" accept=".enc,application/octet-stream" hidden></div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي نشط</small></div><span class="status-dot">نشط</span></div></section>
+          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="security"><div class="settings-panel-title">الأمان والخصوصية</div><p>أضف طبقة حماية محلية لمساحة العمل على هذا الجهاز.</p><div class="setting-row"><div><strong>رمز PIN</strong><small>استخدم رمزاً من 4 إلى 8 أرقام</small></div><button class="secondary-btn" id="setPinBtn">إعداد / تغيير PIN</button></div><div class="setting-row"><div><strong>قفل التطبيق</strong><small>قفل مساحة العمل الآن</small></div><button class="secondary-btn" id="lockNowBtn">قفل الآن</button></div><div class="setting-row"><div><strong>إزالة رمز PIN</strong><small>تعطيل القفل المحلي</small></div><button class="danger-btn" id="removePinBtn">إزالة PIN</button></div></section>
+          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="advanced"><div class="settings-panel-title">إعدادات متقدمة</div><p>إجراءات تؤثر على بيانات مساحة العمل. تأكد قبل المتابعة.</p><div class="setting-row danger-setting"><div><strong>مسح جميع البيانات</strong><small>حذف المهام والملاحظات والعناصر والتذكيرات نهائياً</small></div><button class="danger-btn" id="clearDataBtn">مسح البيانات</button></div></section>
         </div>
       </section>
 
