@@ -711,3 +711,35 @@ body.dark #page-home .welcome-time strong{color:#D8BD83!important}
 
 /* Backup and restore panel */
 .backup-action-group{padding:14px 0 5px;border-top:1px solid var(--line)}.backup-action-group>strong,.backup-action-group>small{display:block}.backup-action-group>strong{font-size:12px}.backup-action-group>small{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.7}.backup-action-group .setting-actions{margin:10px 0 5px}.backup-warning{padding:12px 14px;margin:12px 0;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:10px;line-height:1.8}
+
+/* Unified MADAR dialogs */
+.app-dialog-backdrop{position:fixed;inset:0;z-index:10000;background:rgba(38,36,31,.48);backdrop-filter:blur(5px);display:grid;place-items:center;padding:18px;animation:fade .16s ease}
+.app-dialog-backdrop.hidden{display:none!important}
+.app-dialog-card{width:min(100%,460px);background:#FFFDF8;border:1px solid #E8E0D1;border-radius:23px;padding:25px;box-shadow:0 24px 80px rgba(37,32,23,.22);direction:rtl}
+.app-dialog-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.app-dialog-icon{width:42px;height:42px;border-radius:14px;background:#F2EBDD;color:#A18450;display:grid;place-items:center;font-size:20px;font-weight:700}
+.app-dialog-icon[data-kind="danger"]{background:#F7E9E3;color:#B86C57}.app-dialog-icon[data-kind="success"]{background:#E8F0E8;color:#587B60}
+.app-dialog-brand{font-size:10px;letter-spacing:2px;color:#A18450;font-weight:700}
+.app-dialog-title{font-size:19px;color:#34342F;margin:0 0 9px;font-weight:700}
+.app-dialog-message{white-space:pre-line;color:#777367;font-size:12px;line-height:1.9;margin:0 0 17px}
+.app-dialog-field{margin:0 0 17px}
+.app-dialog-input{width:100%;border:1px solid #E4DCCB;border-radius:12px;background:#FAF8F2;color:#34342F;padding:12px 14px;outline:none;min-height:46px}
+.app-dialog-input:focus{border-color:#C6A66D;box-shadow:0 0 0 3px rgba(198,166,109,.15)}
+.password-wrap{position:relative}.password-wrap .app-dialog-input{padding-left:68px}
+.password-toggle{position:absolute;left:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#987B4A;font-size:11px;font-weight:700;padding:7px}
+.app-dialog-actions{display:flex;gap:9px;flex-wrap:wrap}
+.app-dialog-actions button{flex:1;min-width:105px;min-height:42px}
+.app-dialog-actions .danger-btn{background:#F4E5DE;color:#A85D4D}
+.app-dialog-foot{border-top:1px solid #EEE8DC;margin-top:19px;padding-top:12px;color:#A49D8F;font-size:9px;text-align:center}
+body.dark .app-dialog-card{background:#292B2E;border-color:#45474A;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+body.dark .app-dialog-title{color:#F1EEE6}body.dark .app-dialog-message{color:#BDB9AE}
+body.dark .app-dialog-icon{background:#3A3934;color:#D8BD83}body.dark .app-dialog-icon[data-kind="danger"]{background:#493532;color:#E6A08D}
+body.dark .app-dialog-input{background:#343639;border-color:#4B4D4F;color:#F1EEE6}
+body.dark .app-dialog-foot{border-color:#45474A;color:#8F908D}
+body.dark .app-dialog-actions .danger-btn{background:#493532;color:#E6A08D}
+@media(max-width:520px){.app-dialog-card{padding:21px 18px;border-radius:20px}.app-dialog-title{font-size:17px}.app-dialog-actions{flex-direction:column-reverse}.app-dialog-actions button{width:100%}}
+
+/* PIN recovery action */
+.text-btn{border:0;background:transparent;color:#987B4A;font:inherit;font-size:12px;font-weight:700;padding:12px;margin-top:5px;cursor:pointer}
+.text-btn:hover{text-decoration:underline}
+body.dark .text-btn{color:#D8BD83}

@@ -6,20 +6,21 @@
   <meta name="theme-color" content="#191A1B">
   <meta name="description" content="MADAR — مساحة عربية لتنظيم المهام والملاحظات والتذكيرات">
   <title>MADAR | مدار</title>
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="./assets/icon-192.png" type="image/png">
-  <link rel="preload" as="image" href="./assets/madar-logo.png">
-  <link rel="apple-touch-icon" href="./assets/icon-192.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/assets/icon-192.png" type="image/png">
+  <link rel="preload" as="image" href="/assets/madar-logo.png">
+  <link rel="apple-touch-icon" href="/assets/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <div id="lockScreen" class="lock-screen hidden">
     <div class="lock-card">
-      <img class="brand-logo brand-logo-large" src="./assets/madar-logo.png" alt="MADAR" width="1344" height="172" decoding="async" onerror="this.onerror=null;this.src='./assets/madar-logo-original.png';">
+      <img class="brand-logo brand-logo-large" src="/assets/madar-logo.png" data-logo-light="/assets/madar-logo.png" data-logo-dark="/assets/madar-logo-dark.png" data-logo-fallback="/assets/madar-logo-fallback.png" alt="MADAR" width="1344" height="172" decoding="async" fetchpriority="high">
       <h1>مرحباً بعودتك</h1>
       <p>أدخل رمز PIN لفتح مساحة العمل</p>
       <input id="unlockPin" class="pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" aria-label="رمز PIN">
       <button id="unlockBtn" class="primary-btn full">فتح التطبيق</button>
+      <button id="recoverPinBtn" class="text-btn full" type="button">نسيت رمز PIN؟ استرداد الوصول</button>
       <p id="unlockError" class="error-text"></p>
     </div>
   </div>
@@ -28,7 +29,7 @@
     <button class="sidebar-backdrop" id="sidebarBackdrop" aria-label="إغلاق القائمة"></button>
     <aside class="sidebar" id="sidebar" aria-label="القائمة الجانبية">
       <div class="brand">
-        <img class="brand-logo" src="./assets/madar-logo.png" alt="MADAR" width="1344" height="172" decoding="async" onerror="this.onerror=null;this.src='./assets/madar-logo-original.png';">
+        <img class="brand-logo" src="/assets/madar-logo.png" data-logo-light="/assets/madar-logo.png" data-logo-dark="/assets/madar-logo-dark.png" data-logo-fallback="/assets/madar-logo-fallback.png" alt="MADAR" width="1344" height="172" decoding="async" fetchpriority="high">
         <div class="brand-name">MADAR<span>خطط بهدوء، وأنجز بوضوح</span></div>
         <div class="sidebar-controls"><button class="icon-btn collapse-btn" id="collapseSidebar" type="button" aria-label="طي القائمة" aria-expanded="true" title="طي القائمة">‹</button><button class="icon-btn sidebar-close" id="closeSidebar" type="button" aria-label="إغلاق القائمة">×</button></div>
       </div>
@@ -157,16 +158,15 @@
           <section class="settings-group"><div class="settings-group-title">إدارة مساحة العمل</div>
             <button class="settings-link" data-settings-open="advanced"><span class="settings-symbol advanced-symbol">⚙</span><span class="settings-link-copy"><strong>إعدادات متقدمة</strong><small>إجراءات إعادة التعيين وإدارة البيانات</small></span><span class="settings-chevron">‹</span></button>
           </section>
-          <div class="settings-device-note"><span>✦</span><div><strong>مساحة عملك، بإعداداتك</strong><small>تُحفظ تفضيلاتك وبياناتك محلياً على هذا الجهاز.</small></div></div>
           <div class="version-note">مساحة العمل · الإصدار 1.0.0</div>
         </div>
         <div id="settingsDetail" class="settings-detail hidden">
           <button class="settings-back" id="settingsBack"><span>›</span> كل الإعدادات</button>
           <div class="settings-detail-heading"><div class="settings-detail-icon" id="settingsDetailIcon">◐</div><div><h2 id="settingsDetailTitle">المظهر والشاشة</h2><p id="settingsDetailDescription">خصص طريقة عرض التطبيق.</p></div></div>
-          <section class="panel settings-section settings-detail-panel" data-settings-panel="appearance"><div class="settings-panel-title">تخصيص العرض</div><p>اختر المظهر والتنسيقات التي تناسبك.</p><div class="setting-row"><div><strong>نمط العرض</strong><small>فاتح أو داكن أو حسب إعدادات الجهاز</small></div><select id="themeSelect"><option value="light">فاتح</option><option value="dark">داكن</option><option value="system">تلقائي</option></select></div><div class="setting-row"><div><strong>بداية الأسبوع</strong><small>اليوم الأول في التقويم</small></div><select id="weekStart"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option></select></div><div class="setting-row"><div><strong>تنسيق الساعة</strong><small>طريقة عرض الوقت</small></div><select id="timeFormat"><option value="12">12 ساعة</option><option value="24">24 ساعة</option></select></div><div class="setting-row"><div><strong>إظهار الثواني</strong><small>إظهار الثواني في الساعة الرئيسية</small></div><input type="checkbox" id="showSeconds"></div></section>
-          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="storage"><div class="settings-panel-title">البيانات والنسخ الاحتياطي</div><p>صدّر بياناتك للاحتفاظ بها، أو استعد نسخة سابقة على هذا الجهاز.</p><div class="backup-action-group"><strong>نسخة عادية</strong><small>ملف JSON يمكنك نقله وفتحه، دون كلمة مرور.</small><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تصدير نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد ملف JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden></div></div><div class="backup-action-group"><strong>نسخة مشفّرة</strong><small>حماية بكلمة مرور باستخدام AES-256. استخدم كلمة المرور نفسها عند الاستعادة.</small><div class="setting-actions"><button class="secondary-btn" id="encryptedExport">تصدير نسخة مشفّرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفّرة</button><input type="file" id="encryptedFile" accept=".enc,.madar.enc,application/octet-stream,application/json" hidden></div></div><div class="backup-warning">عند الاستيراد اختر الدمج لإضافة العناصر الجديدة دون تكرار (مع الاحتفاظ بالبيانات الحالية)، أو الاستبدال لاستعادة النسخة بالكامل. يُنصح بتصدير نسخة احتياطية قبل الاستيراد. التشفير يتطلب تشغيل التطبيق عبر HTTPS أو localhost.</div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي على هذا الجهاز</small></div><span class="status-dot">نشط</span></div></section>
-          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="security"><div class="settings-panel-title">الأمان والخصوصية</div><p>أضف طبقة حماية محلية لمساحة العمل على هذا الجهاز.</p><div class="setting-row"><div><strong>رمز PIN</strong><small>استخدم رمزاً من 4 إلى 8 أرقام</small></div><button class="secondary-btn" id="setPinBtn">إعداد / تغيير PIN</button></div><div class="setting-row"><div><strong>قفل التطبيق</strong><small>قفل مساحة العمل الآن</small></div><button class="secondary-btn" id="lockNowBtn">قفل الآن</button></div><div class="setting-row"><div><strong>إزالة رمز PIN</strong><small>تعطيل القفل المحلي</small></div><button class="danger-btn" id="removePinBtn">إزالة PIN</button></div></section>
-          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="advanced"><div class="settings-panel-title">إعدادات متقدمة</div><p>إجراءات تؤثر على بيانات مساحة العمل. تأكد قبل المتابعة.</p><div class="setting-row danger-setting"><div><strong>مسح جميع البيانات</strong><small>حذف المهام والملاحظات والعناصر والتذكيرات نهائياً</small></div><button class="danger-btn" id="clearDataBtn">مسح البيانات</button></div></section>
+          <section class="panel settings-section settings-detail-panel" data-settings-panel="appearance"><div class="settings-panel-title">تخصيص العرض</div><div class="setting-row"><div><strong>نمط العرض</strong><small>فاتح أو داكن أو حسب إعدادات الجهاز</small></div><select id="themeSelect"><option value="light">فاتح</option><option value="dark">داكن</option><option value="system">تلقائي</option></select></div><div class="setting-row"><div><strong>بداية الأسبوع</strong><small>اليوم الأول في التقويم</small></div><select id="weekStart"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option></select></div><div class="setting-row"><div><strong>تنسيق الساعة</strong><small>طريقة عرض الوقت</small></div><select id="timeFormat"><option value="12">12 ساعة</option><option value="24">24 ساعة</option></select></div><div class="setting-row"><div><strong>إظهار الثواني</strong><small>إظهار الثواني في الساعة الرئيسية</small></div><input type="checkbox" id="showSeconds"></div></section>
+          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="storage"><div class="settings-panel-title">البيانات والنسخ الاحتياطي</div><div class="backup-action-group"><strong>نسخة عادية</strong><small>ملف JSON يمكنك نقله وفتحه، دون كلمة مرور.</small><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تصدير نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد ملف JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden></div></div><div class="backup-action-group"><strong>نسخة مشفّرة</strong><small>حماية بكلمة مرور باستخدام AES-256. استخدم كلمة المرور نفسها عند الاستعادة.</small><div class="setting-actions"><button class="secondary-btn" id="encryptedExport">تصدير نسخة مشفّرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفّرة</button><input type="file" id="encryptedFile" accept=".enc,.madar.enc,application/octet-stream,application/json" hidden></div></div><div class="backup-warning">عند الاستيراد اختر الدمج لإضافة العناصر الجديدة دون تكرار (مع الاحتفاظ بالبيانات الحالية)، أو الاستبدال لاستعادة النسخة بالكامل. يُنصح بتصدير نسخة احتياطية قبل الاستيراد. التشفير يتطلب تشغيل التطبيق عبر HTTPS أو localhost.</div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي على هذا الجهاز</small></div><span class="status-dot">نشط</span></div></section>
+          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="security"><div class="settings-panel-title">الأمان والخصوصية</div><div class="setting-row"><div><strong>رمز PIN</strong><small>رمز من 4 إلى 8 أرقام، مع رمز استرداد تختاره بنفسك</small></div><button class="secondary-btn" id="setPinBtn">إعداد / تغيير PIN</button></div><div class="setting-row"><div><strong>قفل التطبيق</strong><small>قفل مساحة العمل الآن</small></div><button class="secondary-btn" id="lockNowBtn">قفل الآن</button></div><div class="setting-row"><div><strong>إزالة رمز PIN</strong><small>تعطيل القفل المحلي</small></div><button class="danger-btn" id="removePinBtn">إزالة PIN</button></div></section>
+          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="advanced"><div class="settings-panel-title">إعدادات متقدمة</div><div class="setting-row danger-setting"><div><strong>مسح جميع البيانات</strong><small>حذف المهام والملاحظات والعناصر والتذكيرات نهائياً</small></div><button class="danger-btn" id="clearDataBtn">مسح البيانات</button></div></section>
         </div>
       </section>
 
@@ -188,7 +188,17 @@
       <form id="itemForm"><div id="modalFields"></div><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">إلغاء</button><button type="submit" class="primary-btn">حفظ</button></div></form>
     </section>
   </div>
+  <div class="app-dialog-backdrop hidden" id="appDialog" aria-hidden="true">
+    <section class="app-dialog-card" role="dialog" aria-modal="true" aria-labelledby="appDialogTitle">
+      <div class="app-dialog-top"><div class="app-dialog-icon app-dialog-icon" data-kind="info">✦</div><span class="app-dialog-brand">MADAR</span></div>
+      <h2 class="app-dialog-title" id="appDialogTitle">تأكيد</h2>
+      <p class="app-dialog-message"></p>
+      <div class="app-dialog-field"></div>
+      <div class="app-dialog-actions"></div>
+      <div class="app-dialog-foot">مساحة عملك، بياناتك بأمان</div>
+    </section>
+  </div>
   <div class="toast-region" id="toastRegion" aria-live="polite"></div>
-  <script src="app.js"></script>
+  <script src="/app.js" defer></script>
 </body>
 </html>
