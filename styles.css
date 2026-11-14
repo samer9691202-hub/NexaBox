@@ -430,3 +430,115 @@ body.dark .status-dot,
 body.dark .connection-pill i{background:#D8BD83!important}
 body.dark .storage-symbol,
 body.dark .security-symbol{box-shadow:none!important}
+
+/* MADAR final repair: charcoal-only dark theme, high-contrast logo, stable collapsed sidebar */
+body.dark{
+  --bg:#191A1B;
+  --workspace:#202224;
+  --surface:#2A2C2F;
+  --surface-2:#34373A;
+  --line:#45484B;
+  --text:#F1EEE6;
+  --muted:#AAA9A3;
+  --primary:#D8BD83;
+  --primary-dark:#C5A96F;
+  --shadow:0 12px 34px rgba(0,0,0,.28);
+  background:var(--bg);
+  color:var(--text);
+}
+body.dark .app-shell{background:var(--bg)}
+body.dark .sidebar,
+body.dark .main-area,
+body.dark .mobile-nav,
+body.dark .stat-card,
+body.dark .panel,
+body.dark .modal-card,
+body.dark .settings-card,
+body.dark .calendar-card,
+body.dark .lock-card{background:var(--surface);border-color:var(--line);color:var(--text)}
+body.dark .main-area{background:var(--workspace)}
+body.dark .board-column,
+body.dark .task-row,
+body.dark .reminder-item,
+body.dark .note-card,
+body.dark .library-card,
+body.dark .archive-row,
+body.dark .calendar-cell,
+body.dark .settings-link,
+body.dark .settings-search,
+body.dark .form-field input,
+body.dark .form-field textarea,
+body.dark .form-field select,
+body.dark .pin-input,
+body.dark .toolbar,
+body.dark .settings-device-note{background:var(--surface-2)!important;border-color:var(--line)!important;color:var(--text)}
+body.dark .nav-item.active,
+body.dark .primary-btn,
+body.dark .round-add,
+body.dark .tab-btn.active,
+body.dark .filter-btn.active,
+body.dark .segmented button.active,
+body.dark .today-btn,
+body.dark .toast,
+body.dark .progress-fill,
+body.dark .bar-fill,
+body.dark .calendar-dots i,
+body.dark .task-check:checked{background:#D8BD83!important;border-color:#D8BD83!important;color:#242321!important}
+body.dark .brand-mark,
+body.dark .avatar,
+body.dark .stat-icon,
+body.dark .nav-count,
+body.dark .badge,
+body.dark .reminder-date,
+body.dark .progress-icon,
+body.dark .category-icon,
+body.dark .feature-icon,
+body.dark .calendar-icon,
+body.dark .task-icon,
+body.dark .settings-symbol,
+body.dark .appearance-symbol,
+body.dark .storage-symbol,
+body.dark .security-symbol,
+body.dark .advanced-symbol,
+body.dark .settings-detail-icon{background:rgba(216,189,131,.14)!important;color:#D8BD83!important;border-color:rgba(216,189,131,.25)!important}
+body.dark .text-btn,
+body.dark .panel-link,
+body.dark .settings-back,
+body.dark .eyebrow,
+body.dark a,
+body.dark .welcome-chip,
+body.dark .settings-group-title,
+body.dark .nav-item.active .nav-icon,
+body.dark .mobile-nav button.active{color:#D8BD83!important}
+body.dark .nav-item:hover,
+body.dark .tiny-action:hover,
+body.dark .icon-btn:hover{background:#34373A!important;color:#F1EEE6!important}
+body.dark .priority-dot,
+body.dark .p-high,
+body.dark .p-medium,
+body.dark .p-normal,
+body.dark .status-dot,
+body.dark .connection-pill i{background:#D8BD83!important}
+body.dark .calendar-cell.today,
+body.dark .calendar-cell.selected{background:#34373A!important;border-color:#D8BD83!important}
+body.dark .calendar-cell.today .day-number{background:#D8BD83!important;color:#242321!important}
+body.dark .welcome-card{background:linear-gradient(115deg,#303235,#292B2E 60%,#343639)!important;border-color:#484A4D!important}
+body.dark .welcome-card h1,
+body.dark .clock-row strong,
+body.dark .stat-card strong,
+body.dark .task-main strong,
+body.dark .panel h2,
+body.dark .section-heading h2,
+body.dark .page-intro h1{color:#F1EEE6!important}
+body.dark .collapse-btn,
+body.dark .sidebar-close{background:#34373A!important;color:#D8BD83!important;border-color:#45484B!important}
+body.dark .connection-pill i{box-shadow:0 0 0 3px rgba(216,189,131,.12)}
+.brand{min-width:0;position:relative}
+.brand-logo{width:132px;max-width:100%;height:auto;max-height:38px;object-fit:contain;object-position:right center}
+@media(min-width:761px){
+  .collapsed .brand{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:9px;min-height:88px;padding:0 0 18px}
+  .collapsed .brand-logo{display:block;width:58px;max-width:58px;height:auto;max-height:none;object-position:center;margin:0 auto}
+  .collapsed .sidebar-controls{position:static;transform:none;margin:0;justify-content:center}
+  .collapsed .collapse-btn{display:grid;width:30px;height:30px}
+  .collapsed .brand-name{display:none!important}
+}
