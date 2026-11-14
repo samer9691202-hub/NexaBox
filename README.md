@@ -35,3 +35,7 @@
 - `manifest.webmanifest`: تعريف PWA.
 - `sw.js`: التخزين المؤقت للعمل دون اتصال.
 - `assets/`: الأيقونات.
+
+## هوية MADAR
+- `assets/madar-logo.png`: شعار MADAR مقصوص بخلفية شفافة للاستخدام داخل الواجهة.
+- `assets/madar-logo-original.png`: الصورة الأصلية المرفقة للشعار كما وردت.

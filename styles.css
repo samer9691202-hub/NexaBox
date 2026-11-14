@@ -309,3 +309,124 @@ body.dark #page-home .text-btn:hover{background:#34373A}
 .lock-card p{color:#B9B7B0}
 .lock-card h1{color:#F2F0EA}
 @media(max-width:760px){.brand-logo{width:126px;max-height:36px}.brand{padding-bottom:25px}}
+
+/* MADAR: clean welcome card — no decorative art, circles, badges or overlapping copy */
+#page-home .welcome-card,
+body.dark #page-home .welcome-card{
+  min-height:210px;
+  height:auto;
+  padding:30px clamp(20px,3vw,38px);
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:24px;
+  box-shadow:var(--card-shadow);
+}
+#page-home .welcome-card:before,
+#page-home .welcome-card:after{content:none!important;display:none!important}
+#page-home .welcome-copy{position:relative;z-index:1;width:100%;max-width:100%;min-width:0;}
+#page-home .welcome-card .eyebrow{display:block;position:static;margin:0 0 8px;line-height:1.5;}
+#page-home .welcome-card h1{position:static;display:block;margin:0 0 8px;line-height:1.35;font-size:clamp(25px,3vw,33px);overflow-wrap:anywhere;}
+#page-home .welcome-card p{position:static;display:block;margin:0 0 14px;max-width:100%;line-height:1.8;}
+#page-home .clock-row{position:static;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px;}
+#page-home .clock-row strong{display:inline-block;line-height:1.2;}
+#page-home .clock-row span{display:inline-block;line-height:1.6;}
+#page-home .welcome-art,#page-home .welcome-chip{display:none!important}
+@media(max-width:760px){
+  #page-home .welcome-card{min-height:0;padding:24px 19px;border-radius:20px;}
+  #page-home .welcome-copy{max-width:100%;}
+  #page-home .welcome-card h1{font-size:24px;line-height:1.4;}
+  #page-home .welcome-card p{font-size:11px;max-width:100%;}
+  #page-home .clock-row strong{font-size:32px;}
+  #page-home .clock-row span{font-size:10px;}
+}
+
+/* MADAR dark-mode consistency pass: eliminate leftover green surfaces and accents */
+body.dark{
+  --primary:#D8BD83;
+  --primary-dark:#C5A96F;
+  --surface:#2A2C2F;
+  --surface-2:#34373A;
+  --line:#45484B;
+}
+body.dark .settings-symbol,
+body.dark .appearance-symbol,
+body.dark .storage-symbol,
+body.dark .security-symbol,
+body.dark .advanced-symbol,
+body.dark .settings-detail-icon,
+body.dark .settings-device-note,
+body.dark .settings-device-note>span,
+body.dark .settings-group-title{
+  background:#34373A!important;
+  border-color:#45484B!important;
+  color:#D8BD83!important;
+}
+body.dark .settings-device-note{background:#2A2C2F!important}
+body.dark .stat-icon,
+body.dark .brand-mark,
+body.dark .avatar,
+body.dark .nav-count,
+body.dark .badge,
+body.dark .reminder-date,
+body.dark .progress-icon,
+body.dark .category-icon,
+body.dark .feature-icon,
+body.dark .calendar-icon,
+body.dark .task-icon{
+  background:rgba(216,189,131,.14)!important;
+  color:#D8BD83!important;
+  border-color:rgba(216,189,131,.22)!important;
+}
+body.dark .nav-item.active,
+body.dark .tab-btn.active,
+body.dark .filter-btn.active,
+body.dark .segmented button.active,
+body.dark .primary-btn,
+body.dark .today-btn,
+body.dark .toast,
+body.dark .progress-fill,
+body.dark .bar-fill,
+body.dark .calendar-dots i{
+  background:#D8BD83!important;
+  color:#242321!important;
+  border-color:#D8BD83!important;
+}
+body.dark .text-btn,
+body.dark .panel-link,
+body.dark .settings-back,
+body.dark .eyebrow,
+body.dark a,
+body.dark .welcome-chip,
+body.dark .nav-item.active .nav-icon,
+body.dark .settings-group-title{
+  color:#D8BD83!important;
+}
+body.dark .reminder-item,
+body.dark .task-row,
+body.dark .archive-row,
+body.dark .calendar-cell,
+body.dark .board-column,
+body.dark .note-card,
+body.dark .library-card,
+body.dark .settings-link,
+body.dark .settings-search,
+body.dark .form-field input,
+body.dark .form-field textarea,
+body.dark .form-field select,
+body.dark .pin-input{
+  background:#34373A!important;
+  border-color:#45484B!important;
+}
+body.dark .reminder-date{background:rgba(216,189,131,.14)!important;color:#D8BD83!important}
+body.dark .task-check:checked{background:#D8BD83!important;border-color:#D8BD83!important}
+body.dark .priority-dot,
+body.dark .p-high,
+body.dark .p-medium,
+body.dark .p-normal,
+body.dark .status-dot,
+body.dark .connection-pill i{background:#D8BD83!important}
+body.dark .storage-symbol,
+body.dark .security-symbol{box-shadow:none!important}
