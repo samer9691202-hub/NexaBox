@@ -1,124 +1,180 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#8f4938">
-<title>رَواق | معرض الصور</title>
-<style>
-:root{--bg:#f5f1eb;--panel:#fffdfa;--ink:#292521;--muted:#81786f;--line:#e8dfd5;--accent:#8f4938;--accent2:#bd806b;--soft:#f2e5de;--shadow:0 12px 35px rgba(62,43,31,.08)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
-button,input{font:inherit}button{cursor:pointer}.app{max-width:1440px;margin:auto;padding:22px}
-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:17px;background:var(--accent);color:white;display:grid;place-items:center;font-size:24px;box-shadow:var(--shadow)}h1{font-size:23px;margin:0}.subtitle{font-size:12px;color:var(--muted);margin-top:3px}
-.header-actions,.toolbar,.filters,.bulk-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 14px;border-radius:13px;display:inline-flex;align-items:center;gap:7px;font-size:13px;min-height:42px}.btn.primary{background:var(--accent);color:white;border-color:var(--accent)}.btn.soft{background:var(--soft);border-color:transparent;color:var(--accent)}.btn:disabled{opacity:.45;cursor:not-allowed}
-.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:18px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:15px 17px}.stat strong{font-size:22px;display:block}.stat span{font-size:12px;color:var(--muted)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:15px;margin-bottom:16px;box-shadow:var(--shadow)}
-.toolbar{justify-content:space-between}.search{flex:1;min-width:190px;position:relative}.search input{width:100%;height:43px;border:1px solid var(--line);border-radius:13px;padding:0 40px 0 12px;background:#fff;color:var(--ink);outline:none}.search:before{content:"⌕";position:absolute;right:14px;top:4px;font-size:25px;color:var(--muted)}
-select{height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 11px;color:var(--ink)}
-.filters{margin-top:13px}.chip{border:1px solid var(--line);border-radius:30px;background:white;padding:8px 14px;font-size:12px;color:var(--muted)}.chip.active{background:var(--soft);color:var(--accent);border-color:#e4c9bd;font-weight:700}
-.dropzone{border:1.5px dashed #d7b9aa;background:#fbf5f1;border-radius:18px;padding:19px;text-align:center;margin-bottom:16px;color:var(--muted)}.dropzone strong{color:var(--accent);display:block;margin-bottom:4px}.dropzone.drag{background:#f2e5de;border-color:var(--accent)}
-.gallery-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:17px 2px 12px}.gallery-head h2{font-size:16px;margin:0}.count{font-size:12px;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:13px}.tile{position:relative;border:1px solid var(--line);background:white;border-radius:16px;overflow:hidden;min-width:0;transition:.18s}.tile.selected{outline:3px solid #c68b76}.thumb{height:150px;background:#eee8e1;display:grid;place-items:center;overflow:hidden;position:relative}.thumb img,.thumb video{width:100%;height:100%;object-fit:cover}.video-badge{position:absolute;bottom:9px;right:9px;background:#211d1bd9;color:#fff;padding:4px 8px;border-radius:20px;font-size:11px}.tile-info{padding:10px}.filename{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:auto}.meta{font-size:10px;color:var(--muted);margin-top:5px;display:flex;justify-content:space-between;gap:5px}.tile-actions{display:flex;gap:6px;padding:0 9px 9px}.icon-btn{width:33px;height:31px;border:1px solid var(--line);background:#fff;border-radius:10px;color:var(--muted)}.icon-btn.fav{color:#b24e5b;background:#fff2f2}.empty{padding:45px 15px;text-align:center;color:var(--muted)}.empty b{display:block;color:var(--ink);margin-bottom:7px}
-.list{display:flex;flex-direction:column;gap:8px}.list .tile{display:flex;align-items:center;padding:7px;gap:12px}.list .thumb{width:78px;height:66px;flex:0 0 78px;border-radius:10px}.list .tile-info{flex:1;min-width:0}.list .tile-actions{padding:0}
-footer{font-size:11px;color:var(--muted);text-align:center;padding:18px}
-.overlay{position:fixed;inset:0;background:#171311eF;display:none;align-items:center;justify-content:center;padding:18px;z-index:5}.overlay.show{display:flex}.viewer{width:min(100%,1000px);max-height:95vh;display:flex;flex-direction:column;align-items:center;gap:10px;color:white}.viewer-media{max-width:100%;max-height:78vh;object-fit:contain;border-radius:12px}.viewer-bar{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px}.viewer button{border:1px solid #ffffff55;background:#ffffff18;color:white;border-radius:12px;padding:9px 13px}.viewer-name{font-size:13px;overflow-wrap:anywhere;text-align:center}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#292521;color:white;padding:11px 16px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:10}.toast.show{opacity:1}
-@media(max-width:650px){.app{padding:13px}header{align-items:flex-start}.header-actions .btn span{display:none}.stats{gap:7px}.stat{padding:12px}.stat strong{font-size:19px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.thumb{height:132px}.toolbar{align-items:stretch}.search{flex-basis:100%}.dropzone{padding:15px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#E3DAC9">
+  <meta name="description" content="مساحة إنتاجية عربية لإدارة المهام والملاحظات والتذكيرات">
+  <title>مساحة العمل</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="app" id="galleryApp">
-<header>
- <div class="brand"><div class="logo">▧</div><div><h1>رَواق</h1><div class="subtitle">معرضك الخاص للصور والفيديوهات</div></div></div>
- <div class="header-actions">
-  <button class="btn primary" id="addFiles">＋ <span>إضافة ملفات</span></button>
-  <button class="btn" id="addFolder">▤ <span>إضافة مجلد</span></button>
-  <input id="fileInput" type="file" accept="image/*,video/*" multiple hidden>
-  <input id="folderInput" type="file" accept="image/*,video/*" multiple webkitdirectory hidden>
- </div>
-</header>
-<section class="stats">
- <div class="stat"><strong id="totalCount">0</strong><span>كل الملفات</span></div>
- <div class="stat"><strong id="imageCount">0</strong><span>الصور</span></div>
- <div class="stat"><strong id="videoCount">0</strong><span>الفيديوهات</span></div>
-</section>
-<div class="dropzone" id="dropzone"><strong>أضف ذكرياتك إلى رَواق</strong>اسحب الصور والفيديوهات إلى هنا، أو استخدم زر إضافة ملفات. تبقى الملفات محفوظة داخل هذا المتصفح.</div>
-<section class="panel">
- <div class="toolbar">
-  <label class="search"><input id="search" type="search" placeholder="ابحث باسم الملف..." aria-label="البحث باسم الملف"></label>
-  <select id="sort" aria-label="ترتيب الملفات"><option value="new">الأحدث أولاً</option><option value="old">الأقدم أولاً</option><option value="name">الاسم أ–ي</option><option value="size">الحجم الأكبر</option></select>
-  <button class="btn" id="viewToggle" aria-label="تغيير طريقة العرض">☷ عرض قائمة</button>
- </div>
- <div class="toolbar" style="margin-top:12px">
-  <select id="albumFilter" aria-label="تصفية حسب الألبوم"><option value="all">كل الألبومات</option></select>
-  <button class="btn soft" id="createAlbum">＋ ألبوم خاص</button>
-  <button class="btn" id="assignAlbum" disabled>نقل المحدد إلى ألبوم</button><button class="btn" id="deleteAlbum">حذف الألبوم الحالي</button>
- </div>
- <div class="filters">
-  <button class="chip active" data-filter="all">الكل</button><button class="chip" data-filter="image">الصور</button><button class="chip" data-filter="video">الفيديوهات</button><button class="chip" data-filter="fav">المفضلة ♥</button><select id="categoryFilter" aria-label="تصنيف الصور"><option value="all">كل التصنيفات</option><option>العائلة</option><option>طبيعة وسفر</option><option>مستندات</option><option>لقطات شاشة</option><option>شخصية وتصاميم</option><option>غير مصنف</option><option>فيديو</option></select>
- </div>
- <div class="gallery-head"><h2>مكتبتي</h2><span class="count" id="shownCount">0 ملف</span></div>
- <div id="gallery" class="grid"><div class="empty"><b>لا توجد ملفات بعد</b>أضف صورك وفيديوهاتك لتظهر هنا.</div></div>
- <div class="bulk-actions" style="margin-top:13px"><button class="btn soft" id="selectAll">تحديد الكل</button><button class="btn" id="downloadSelected" disabled>تنزيل المحدد</button><button class="btn" id="deleteSelected" disabled>حذف المحدد</button><span class="count" id="selectedCount" aria-live="polite"></span></div>
-</section>
-<footer>رَواق · ملفاتك تبقى على جهازك وفي مساحة المتصفح لهذا التطبيق.</footer>
-</div>
-<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="عارض الوسائط">
- <div class="viewer"><div class="viewer-bar"><button id="closeViewer">إغلاق ✕</button><div id="viewerPosition"></div><button id="nextViewer">التالي ←</button></div><div id="viewerContent"></div><div class="viewer-name" id="viewerName"></div><div class="viewer-bar"><button id="prevViewer">→ السابق</button><button id="downloadCurrent">تنزيل الملف ↓</button></div></div>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script>
-(()=>{
-const $=id=>document.getElementById(id), DB='rawaq-gallery-db', STORE='media';
-let db, items=[], albums=[], filtered=[], filter='all', listMode=false, selected=new Set(), currentIndex=0, activeAlbum='all', unlockedAlbums=new Set();
-const fmtDate=d=>new Intl.DateTimeFormat('ar',{year:'numeric',month:'short',day:'numeric'}).format(new Date(d));
-const fmtSize=n=>n<1024*1024?(n/1024).toFixed(0)+' KB':(n/1024/1024).toFixed(1)+' MB';
-function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2400)}
-function openDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open(DB,2);r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:'id'});if(!d.objectStoreNames.contains(ALBUMS))d.createObjectStore(ALBUMS,{keyPath:'id'});};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
-function all(){return new Promise((res,rej)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
-function put(x){return new Promise((res,rej)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).put(x);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
-function del(id){return new Promise((res,rej)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
+  <div id="lockScreen" class="lock-screen hidden">
+    <div class="lock-card">
+      <div class="brand-mark large">✦</div>
+      <h1>مرحباً بعودتك</h1>
+      <p>أدخل رمز PIN لفتح مساحة العمل</p>
+      <input id="unlockPin" class="pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" aria-label="رمز PIN">
+      <button id="unlockBtn" class="primary-btn full">فتح التطبيق</button>
+      <p id="unlockError" class="error-text"></p>
+    </div>
+  </div>
 
-function getAllAlbums(){return new Promise((res,rej)=>{const r=db.transaction(ALBUMS).objectStore(ALBUMS).getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
-function putAlbum(a){return new Promise((res,rej)=>{const r=db.transaction(ALBUMS,'readwrite').objectStore(ALBUMS).put(a);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
-function deleteAlbum(id){return new Promise((res,rej)=>{const r=db.transaction(ALBUMS,'readwrite').objectStore(ALBUMS).delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
-function guessCategory(name,kind){if(kind==='video')return 'فيديو';const n=name.toLowerCase();if(/screenshot|screen.?shot|لقطة|سكرين/.test(n))return 'لقطات شاشة';if(/receipt|invoice|bill|scan|document|pdf|فاتورة|مستند|وثيقة/.test(n))return 'مستندات';if(/family|واجب|عائلة|أهل|اهل/.test(n))return 'العائلة';if(/travel|trip|beach|mountain|طبيعة|سفر|رحلة|بحر/.test(n))return 'طبيعة وسفر';if(/profile|avatar|logo|شعار/.test(n))return 'شخصية وتصاميم';return 'غير مصنف'}
-async function hashPin(pin){const bytes=new TextEncoder().encode(pin);const digest=await crypto.subtle.digest('SHA-256',bytes);return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('')}
-async function refreshAlbums(){albums=await getAllAlbums();const sel=$('albumFilter');if(!sel)return;const keep=activeAlbum;sel.innerHTML='<option value="all">كل الألبومات</option>'+albums.map(a=>`<option value="${a.id}">${escapeHtml(a.name)}${a.pinHash?' 🔒':''}</option>`).join('');if([...sel.options].some(o=>o.value===keep))sel.value=keep;else activeAlbum='all'}
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-mark">✦</div>
+        <div class="brand-name">مساحة العمل<span>خطط بهدوء، وأنجز بوضوح</span></div>
+        <button class="icon-btn collapse-btn" id="collapseSidebar" title="طي القائمة">‹</button>
+      </div>
+      <nav class="main-nav" aria-label="التنقل الرئيسي">
+        <button class="nav-item active" data-page="home"><span class="nav-icon">⌂</span><span>الرئيسية</span></button>
+        <button class="nav-item" data-page="calendar"><span class="nav-icon">▦</span><span>التقويم</span></button>
+        <button class="nav-item" data-page="tasks"><span class="nav-icon">☷</span><span>المهام</span><span class="nav-count" id="taskCount">0</span></button>
+        <button class="nav-item" data-page="notes"><span class="nav-icon">▤</span><span>الملاحظات</span></button>
+        <button class="nav-item" data-page="library"><span class="nav-icon">▣</span><span>القاعدة الرئيسية</span></button>
+        <div class="nav-separator"></div>
+        <button class="nav-item" data-page="archive"><span class="nav-icon">▱</span><span>الأرشيف</span></button>
+        <button class="nav-item" data-page="analytics"><span class="nav-icon">◔</span><span>التحليلات</span></button>
+        <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span><span>الإعدادات</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="mini-profile"><div class="avatar">م</div><div><strong>مساحة شخصية</strong><small>بياناتك على هذا الجهاز</small></div></div>
+        <div class="sidebar-foot">نسخة محلية · تعمل دون إنترنت</div>
+      </div>
+    </aside>
 
-function makeId(){return Date.now().toString(36)+Math.random().toString(36).slice(2,9)}
-async function refresh(){items=await all();await refreshAlbums();$('totalCount').textContent=items.length;$('imageCount').textContent=items.filter(x=>x.kind==='image').length;$('videoCount').textContent=items.filter(x=>x.kind==='video').length;render()}
-async function importFiles(files){let added=0, skipped=0;for(const file of files){if(!file.type.startsWith('image/')&&!file.type.startsWith('video/')){skipped++;continue}try{await put({id:makeId(),name:file.name,type:file.type,kind:file.type.startsWith('video/')?'video':'image',category:guessCategory(file.name,file.type.startsWith('video/')?'video':'image'),albumId:'',size:file.size,addedAt:Date.now(),blob:file,favorite:false});added++}catch(e){skipped++}}await refresh();toast(added?`تمت إضافة ${added} ملفات${skipped?'، وتعذر إضافة '+skipped:''}`:'لم تتم إضافة ملفات صالحة')}
-function render(){const q=$('search').value.trim().toLocaleLowerCase();filtered=items.filter(x=>(filter==='all'||(filter==='fav'?x.favorite:x.kind===filter))&&x.name.toLocaleLowerCase().includes(q)&&(activeAlbum==='all'||x.albumId===activeAlbum)&&($('categoryFilter').value==='all'||(x.category||'غير مصنف')===$('categoryFilter').value));const sort=$('sort').value;filtered.sort((a,b)=>sort==='old'?a.addedAt-b.addedAt:sort==='name'?a.name.localeCompare(b.name,'ar'):sort==='size'?b.size-a.size:b.addedAt-a.addedAt);$('shownCount').textContent=filtered.length+' ملف';const host=$('gallery');host.className=listMode?'list':'grid';host.innerHTML='';if(!filtered.length){host.innerHTML='<div class="empty"><b>لا توجد نتائج</b>جرّب تغيير البحث أو نوع الملفات.</div>'}for(const x of filtered){const tile=document.createElement('article');tile.className='tile'+(selected.has(x.id)?' selected':'');tile.dataset.id=x.id;const url=URL.createObjectURL(x.blob);const thumb=x.kind==='image'?`<img src="${url}" alt="${escapeHtml(x.name)}" loading="lazy">`:`<video src="${url}" muted preload="metadata"></video><span class="video-badge">▶ فيديو</span>`;tile.innerHTML=`<div class="thumb" data-open="${x.id}">${thumb}</div><div class="tile-info"><div class="filename" title="${escapeHtml(x.name)}">${escapeHtml(x.name)}</div><div class="meta"><span>${fmtDate(x.addedAt)}</span><span>${fmtSize(x.size)}</span></div><div class="meta"><span>${escapeHtml(x.category||"غير مصنف")}</span><span>${escapeHtml((albums.find(a=>a.id===x.albumId)||{}).name||"بدون ألبوم")}</span></div></div><div class="tile-actions"><select data-category="${x.id}" aria-label="تغيير التصنيف" style="min-width:0;max-width:115px;height:31px;font-size:10px;padding:0 4px"><option ${x.category==="غير مصنف"?"selected":""}>غير مصنف</option><option ${x.category==="العائلة"?"selected":""}>العائلة</option><option ${x.category==="طبيعة وسفر"?"selected":""}>طبيعة وسفر</option><option ${x.category==="مستندات"?"selected":""}>مستندات</option><option ${x.category==="لقطات شاشة"?"selected":""}>لقطات شاشة</option><option ${x.category==="شخصية وتصاميم"?"selected":""}>شخصية وتصاميم</option><option ${x.category==="فيديو"?"selected":""}>فيديو</option></select><button class="icon-btn ${x.favorite?'fav':''}" data-fav="${x.id}" aria-label="المفضلة">${x.favorite?'♥':'♡'}</button><button class="icon-btn" data-select="${x.id}" aria-label="تحديد الملف">${selected.has(x.id)?'✓':'□'}</button><button class="icon-btn" data-download="${x.id}" aria-label="تنزيل">↓</button></div>`;host.append(tile)}updateBulk()}
-function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function updateBulk(){const n=selected.size;$('selectedCount').textContent=n?`تم تحديد ${n}`:'';$('downloadSelected').disabled=!n;$('deleteSelected').disabled=!n;$('assignAlbum').disabled=!n}
-async function byId(id){return items.find(x=>x.id===id)}
-function download(x){const u=URL.createObjectURL(x.blob),a=document.createElement('a');a.href=u;a.download=x.name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-$('addFiles').onclick=()=>$('fileInput').click();$('addFolder').onclick=()=>$('folderInput').click();
-$('fileInput').onchange=e=>{importFiles(e.target.files);e.target.value=''};$('folderInput').onchange=e=>{importFiles(e.target.files);e.target.value=''};
-$('search').oninput=render;$('sort').onchange=render;
-document.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(z=>z.classList.toggle('active',z===b));render()});
-$('viewToggle').onclick=()=>{listMode=!listMode;$('viewToggle').textContent=listMode?'▦ عرض شبكة':'☷ عرض قائمة';render()};
-$('gallery').onclick=async e=>{const open=e.target.closest('[data-open]'),fav=e.target.closest('[data-fav]'),sel=e.target.closest('[data-select]'),dl=e.target.closest('[data-download]');if(fav){const x=await byId(fav.dataset.fav);x.favorite=!x.favorite;await put(x);await refresh()}else if(sel){const id=sel.dataset.select;selected.has(id)?selected.delete(id):selected.add(id);render()}else if(dl){const x=await byId(dl.dataset.download);if(x)download(x)}else if(open){const idx=filtered.findIndex(x=>x.id===open.dataset.open);showViewer(idx)}};
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="القائمة">☰</button>
+        <div class="breadcrumb"><span>مساحة العمل</span><b>/</b><strong id="pageTitle">الرئيسية</strong></div>
+        <div class="top-actions">
+          <label class="search-box"><span>⌕</span><input id="globalSearch" type="search" placeholder="ابحث في مساحة العمل"></label>
+          <button class="icon-btn" id="quickAdd" title="إضافة سريعة">＋</button>
+          <button class="icon-btn" id="themeToggle" title="تبديل المظهر">☾</button>
+          <div class="connection-pill"><i></i><span id="connectionText">محلي</span></div>
+        </div>
+      </header>
 
-$('albumFilter').onchange=async e=>{const id=e.target.value;if(id!=='all'){const a=albums.find(x=>x.id===id);if(a&&a.pinHash&&!unlockedAlbums.has(id)){const pin=prompt('هذا ألبوم خاص. أدخل رمز الألبوم لفتحه:');if(pin===null){e.target.value='all';activeAlbum='all';return}if(await hashPin(pin)!==a.pinHash){toast('الرمز غير صحيح');e.target.value='all';activeAlbum='all';return}unlockedAlbums.add(id)}}activeAlbum=id;render()};
-$('categoryFilter').onchange=render;
-$('deleteAlbum').onclick=async()=>{if(activeAlbum==='all'){toast('اختر ألبوماً أولاً');return}const a=albums.find(x=>x.id===activeAlbum);if(!a)return;if(!confirm(`حذف الألبوم «${a.name}»؟ ستبقى ملفاته في المعرض بدون ألبوم.`))return;for(const x of items.filter(y=>y.albumId===a.id)){x.albumId='';await put(x)}await deleteAlbum(a.id);unlockedAlbums.delete(a.id);activeAlbum='all';await refresh();toast('تم حذف الألبوم مع الاحتفاظ بالملفات')};
-$('createAlbum').onclick=async()=>{const name=prompt('اسم الألبوم الجديد:');if(!name||!name.trim())return;const pin=prompt('رمز حماية للألبوم؟ اتركه فارغاً ليكون ألبوماً عادياً.');if(pin===null)return;if(pin&&pin.length<4){toast('اجعل الرمز 4 أحرف أو أرقام على الأقل');return}const a={id:makeId(),name:name.trim(),pinHash:pin?await hashPin(pin):'',createdAt:Date.now()};await putAlbum(a);await refreshAlbums();activeAlbum=a.id;$('albumFilter').value=a.id;if(a.pinHash)unlockedAlbums.add(a.id);render();toast('تم إنشاء الألبوم')};
-$('assignAlbum').onclick=async()=>{if(!selected.size)return;const choices=['بدون ألبوم',...albums.map(a=>a.name)];const choice=prompt('اكتب اسم الألبوم لنقل الملفات إليه:\\n'+choices.join('\\n'));if(choice===null)return;let target='';if(choice!=='بدون ألبوم'){const a=albums.find(x=>x.name===choice);if(!a){toast('اسم الألبوم غير موجود');return}if(a.pinHash&&!unlockedAlbums.has(a.id)){const p=prompt('أدخل رمز الألبوم:');if(p===null||await hashPin(p)!==a.pinHash){toast('الرمز غير صحيح');return}unlockedAlbums.add(a.id)}target=a.id}for(const id of selected){const x=items.find(y=>y.id===id);if(x){x.albumId=target;await put(x)}}selected.clear();await refresh();toast('تم نقل الملفات إلى الألبوم')};
-$('gallery').addEventListener('change',async e=>{const cat=e.target.closest('[data-category]');if(cat){const x=items.find(y=>y.id===cat.dataset.category);if(x){x.category=cat.value;await put(x);await refresh()}}});
+      <section class="page active" id="page-home">
+        <div class="welcome-card">
+          <div class="welcome-copy">
+            <div class="eyebrow">مساحتك، بإيقاعك</div>
+            <h1 id="greeting">صباح الخير</h1>
+            <p id="todayDate">اليوم هو يوم جديد لتنجز شيئاً رائعاً.</p>
+            <div class="clock-row"><strong id="clock">09:41</strong><span id="dayProgress">بداية يوم جميل</span></div>
+          </div>
+          <div class="welcome-art" aria-hidden="true">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-person person-a"><i></i><b></b><em></em></div>
+            <div class="art-person person-b"><i></i><b></b><em></em></div>
+            <div class="art-spark">✦</div><div class="art-dot"></div>
+          </div>
+          <div class="welcome-chip">✧ يومك يبدأ من هنا</div>
+        </div>
 
-$('selectAll').onclick=()=>{if(selected.size===filtered.length)selected.clear();else filtered.forEach(x=>selected.add(x.id));render()};
-$('downloadSelected').onclick=()=>{items.filter(x=>selected.has(x.id)).forEach((x,i)=>setTimeout(()=>download(x),i*250))};
-$('deleteSelected').onclick=async()=>{if(!selected.size)return;if(!confirm(`حذف ${selected.size} ملف من مكتبة رَواق؟ لن تُحذف النسخة الأصلية من جهازك.`))return;for(const id of selected)await del(id);selected.clear();await refresh();toast('تم حذف الملفات من المعرض')};
-function showViewer(i){if(i<0||i>=filtered.length)return;currentIndex=i;const x=filtered[i],u=URL.createObjectURL(x.blob);$('viewerContent').innerHTML=x.kind==='image'?`<img class="viewer-media" src="${u}" alt="${escapeHtml(x.name)}">`:`<video class="viewer-media" src="${u}" controls autoplay></video>`;$('viewerName').textContent=x.name;$('viewerPosition').textContent=(i+1)+' / '+filtered.length;$('overlay').classList.add('show')}
-function closeViewer(){$('overlay').classList.remove('show');$('viewerContent').innerHTML=''}
-$('closeViewer').onclick=closeViewer;$('overlay').onclick=e=>{if(e.target===$('overlay'))closeViewer()};$('nextViewer').onclick=()=>showViewer((currentIndex+1)%filtered.length);$('prevViewer').onclick=()=>showViewer((currentIndex-1+filtered.length)%filtered.length);$('downloadCurrent').onclick=()=>{const x=filtered[currentIndex];if(x)download(x)};
-document.addEventListener('keydown',e=>{if(!$('overlay').classList.contains('show'))return;if(e.key==='Escape')closeViewer();if(e.key==='ArrowRight')showViewer((currentIndex-1+filtered.length)%filtered.length);if(e.key==='ArrowLeft')showViewer((currentIndex+1)%filtered.length)});
-const dz=$('dropzone');['dragenter','dragover'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.add('drag')}));['dragleave','drop'].forEach(t=>dz.addEventListener(t,e=>{e.preventDefault();dz.classList.remove('drag')}));dz.addEventListener('drop',e=>importFiles(e.dataTransfer.files));
-(async()=>{try{db=await openDB();await refreshAlbums();await refresh()}catch(e){toast('تعذر فتح مساحة التخزين في هذا المتصفح')}})();
-})();
-</script>
+        <div class="section-heading"><div><h2>نظرة سريعة</h2><p>ملخص إنجازاتك حتى الآن</p></div><button class="text-btn" data-go="analytics">عرض التحليلات ←</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-icon lilac">☷</div><div><span>إجمالي المهام النشطة</span><strong id="statTotal">0</strong><small>كل ما ينتظر إنجازه</small></div></article>
+          <article class="stat-card"><div class="stat-icon blue">✓</div><div><span>مهام مكتملة</span><strong id="statDone">0</strong><small>خطوات أنجزتها</small></div></article>
+          <article class="stat-card"><div class="stat-icon pink">◷</div><div><span>مهام اليوم</span><strong id="statToday">0</strong><small>مجدولة لهذا اليوم</small></div></article>
+          <article class="stat-card"><div class="stat-icon violet">▤</div><div><span>الملاحظات</span><strong id="statNotes">0</strong><small>أفكارك في مكان واحد</small></div></article>
+        </div>
+
+        <div class="home-columns">
+          <section class="panel task-panel">
+            <div class="panel-heading"><div><h2>مهام اليوم</h2><p>ابدأ بالأهم، والباقي سيأتي</p></div><button class="round-add" data-add="task">＋</button></div>
+            <div id="homeTasks" class="task-list"></div>
+            <button class="panel-link" data-go="tasks">كل المهام <span>←</span></button>
+          </section>
+          <section class="panel reminder-panel">
+            <div class="panel-heading"><div><h2>التذكيرات القادمة</h2><p>أشياء لا تريد نسيانها</p></div><button class="round-add" data-add="reminder">＋</button></div>
+            <div id="homeReminders" class="reminder-list"></div>
+            <button class="panel-link" data-go="calendar">فتح التقويم <span>←</span></button>
+          </section>
+        </div>
+        <section class="panel notes-preview">
+          <div class="panel-heading"><div><h2>من ملاحظاتك</h2><p>أفكار تستحق أن تبقى قريبة</p></div><button class="text-btn" data-go="notes">عرض الكل ←</button></div>
+          <div id="homeNotes" class="notes-grid"></div>
+        </section>
+      </section>
+
+      <section class="page" id="page-tasks">
+        <div class="page-intro"><div><div class="eyebrow">خطوة تلو الأخرى</div><h1>المهام</h1><p>نظّم أولوياتك وحوّل خططك إلى إنجازات.</p></div><button class="primary-btn" data-add="task">＋ مهمة جديدة</button></div>
+        <div class="toolbar panel"><div class="segmented"><button class="selected" data-task-view="list">قائمة</button><button data-task-view="board">لوحة</button></div><select id="taskFilter"><option value="all">كل الحالات</option><option value="new">جديد</option><option value="progress">قيد التنفيذ</option><option value="done">مكتمل</option></select><select id="priorityFilter"><option value="all">كل الأولويات</option><option value="high">عاجلة</option><option value="medium">مهمة</option><option value="normal">عادية</option></select><div class="toolbar-spacer"></div><span class="muted" id="taskSummary">0 مهمة</span></div>
+        <div id="tasksContainer"></div>
+      </section>
+
+      <section class="page" id="page-notes">
+        <div class="page-intro"><div><div class="eyebrow">مساحة للأفكار</div><h1>الملاحظات</h1><p>التقط أفكارك، ورتّبها، وعد إليها وقتما تشاء.</p></div><button class="primary-btn" data-add="note">＋ ملاحظة جديدة</button></div>
+        <div class="toolbar panel"><label class="inline-search">⌕ <input id="notesSearch" placeholder="ابحث في الملاحظات"></label><select id="notesFilter"><option value="active">النشطة</option><option value="all">الكل</option></select></div>
+        <div id="notesContainer" class="notes-grid large-grid"></div>
+      </section>
+
+      <section class="page" id="page-calendar">
+        <div class="page-intro"><div><div class="eyebrow">رتّب وقتك</div><h1>التقويم</h1><p>شاهد مهامك وتذكيراتك عبر الأيام.</p></div><button class="primary-btn" data-add="task">＋ أضف مهمة</button></div>
+        <div class="calendar-layout">
+          <section class="panel calendar-panel"><div class="calendar-head"><button class="icon-btn" id="prevMonth">›</button><h2 id="monthLabel"></h2><button class="icon-btn" id="nextMonth">‹</button><button class="today-btn" id="goToday">اليوم</button></div><div class="calendar-grid" id="calendarGrid"></div></section>
+          <section class="panel day-panel"><div class="panel-heading"><div><h2 id="selectedDayTitle">تفاصيل اليوم</h2><p>مهام وتذكيرات هذا التاريخ</p></div><button class="round-add" id="addForDay">＋</button></div><div id="selectedDayItems"></div></section>
+        </div>
+      </section>
+
+      <section class="page" id="page-library">
+        <div class="page-intro"><div><div class="eyebrow">معلوماتك المهمة</div><h1>القاعدة الرئيسية</h1><p>احتفظ بالمعلومات والعناصر التي تحتاج الرجوع إليها.</p></div><button class="primary-btn" data-add="entry">＋ عنصر جديد</button></div>
+        <div class="toolbar panel"><label class="inline-search">⌕ <input id="librarySearch" placeholder="ابحث في العناصر"></label><span class="muted">مساحتك المرجعية الخاصة</span></div>
+        <div id="libraryContainer" class="library-grid"></div>
+      </section>
+
+      <section class="page" id="page-archive">
+        <div class="page-intro"><div><div class="eyebrow">احتفظ بما أنجزته</div><h1>الأرشيف</h1><p>العناصر المؤرشفة تبقى هنا حتى تقرر استعادتها أو حذفها.</p></div></div>
+        <div class="toolbar panel"><select id="archiveType"><option value="all">كل العناصر</option><option value="task">المهام</option><option value="note">الملاحظات</option><option value="entry">القاعدة الرئيسية</option></select></div>
+        <div id="archiveContainer"></div>
+      </section>
+
+      <section class="page" id="page-analytics">
+        <div class="page-intro"><div><div class="eyebrow">صورة أوضح لتقدمك</div><h1>التحليلات</h1><p>إحصائيات مباشرة مبنية على بياناتك الفعلية.</p></div></div>
+        <div class="stats-grid analytics-stats">
+          <article class="stat-card"><div class="stat-icon lilac">☷</div><div><span>كل المهام</span><strong id="anTotal">0</strong></div></article>
+          <article class="stat-card"><div class="stat-icon blue">✓</div><div><span>مكتملة</span><strong id="anDone">0</strong></div></article>
+          <article class="stat-card"><div class="stat-icon pink">◷</div><div><span>قيد التنفيذ</span><strong id="anProgress">0</strong></div></article>
+          <article class="stat-card"><div class="stat-icon violet">▤</div><div><span>ملاحظات</span><strong id="anNotes">0</strong></div></article>
+        </div>
+        <div class="analytics-grid"><section class="panel"><h2>حالة المهام</h2><div id="statusChart" class="bar-chart"></div></section><section class="panel"><h2>الأولويات</h2><div id="priorityChart" class="bar-chart"></div></section></div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="page-intro"><div><div class="eyebrow">كما تحبها تماماً</div><h1>الإعدادات</h1><p>تحكم في المظهر وبياناتك وخصوصيتك.</p></div></div>
+        <div class="settings-layout">
+          <section class="panel settings-section"><h2>المظهر</h2><p>اختر المظهر المناسب لك.</p><div class="setting-row"><div><strong>نمط العرض</strong><small>فاتح أو داكن أو حسب الجهاز</small></div><select id="themeSelect"><option value="light">فاتح</option><option value="dark">داكن</option><option value="system">تلقائي</option></select></div><div class="setting-row"><div><strong>بداية الأسبوع</strong><small>اليوم الأول في التقويم</small></div><select id="weekStart"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option></select></div><div class="setting-row"><div><strong>تنسيق الساعة</strong><small>طريقة عرض الوقت</small></div><select id="timeFormat"><option value="12">12 ساعة</option><option value="24">24 ساعة</option></select></div><div class="setting-row"><div><strong>إظهار الثواني</strong><small>إظهار الثواني في الساعة</small></div><input type="checkbox" id="showSeconds"></div></section>
+          <section class="panel settings-section"><h2>البيانات والنسخ الاحتياطي</h2><p>بياناتك محفوظة محلياً على هذا الجهاز.</p><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تنزيل نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد نسخة JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden><button class="secondary-btn" id="encryptedExport">نسخة احتياطية مشفرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفرة</button><input type="file" id="encryptedFile" accept=".enc,application/octet-stream" hidden></div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي نشط</small></div><span class="status-dot">نشط</span></div></section>
+          <section class="panel settings-section"><h2>الحماية</h2><p>أضف قفلاً محلياً إلى مساحة العمل على هذا الجهاز.</p><div class="setting-row"><div><strong>رمز PIN</strong><small>استخدم رمزاً من 4 إلى 8 أرقام</small></div><button class="secondary-btn" id="setPinBtn">إعداد / تغيير PIN</button></div><div class="setting-row"><div><strong>قفل التطبيق</strong><small>قفل مساحة العمل الآن</small></div><button class="secondary-btn" id="lockNowBtn">قفل الآن</button></div><div class="setting-row"><div><strong>إزالة رمز PIN</strong><small>تعطيل القفل المحلي</small></div><button class="danger-btn" id="removePinBtn">إزالة PIN</button></div></section>
+          <section class="panel settings-section danger-zone"><h2>منطقة الإجراءات الحساسة</h2><p>هذه الإجراءات لا يمكن التراجع عنها.</p><button class="danger-btn" id="clearDataBtn">مسح جميع البيانات</button></section>
+          <div class="version-note">مساحة العمل · الإصدار 1.0.0 · تعمل بياناتك على جهازك</div>
+        </div>
+      </section>
+
+      <footer class="app-footer">صُممت لتمنح يومك مساحة أكبر للتركيز <span>✦</span></footer>
+    </main>
+  </div>
+
+  <nav class="mobile-nav">
+    <button class="active" data-page="home"><span>⌂</span>الرئيسية</button>
+    <button data-page="tasks"><span>☷</span>المهام</button>
+    <button data-page="calendar"><span>▦</span>التقويم</button>
+    <button data-page="notes"><span>▤</span>ملاحظات</button>
+    <button data-page="settings"><span>⚙</span>الإعدادات</button>
+  </nav>
+
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-heading"><h2 id="modalTitle">إضافة عنصر</h2><button class="icon-btn" id="closeModal" aria-label="إغلاق">×</button></div>
+      <form id="itemForm"><div id="modalFields"></div><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">إلغاء</button><button type="submit" class="primary-btn">حفظ</button></div></form>
+    </section>
+  </div>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <script src="app.js"></script>
 </body>
 </html>
