@@ -32,15 +32,15 @@
         <div class="sidebar-controls"><button class="icon-btn collapse-btn" id="collapseSidebar" type="button" aria-label="طي القائمة" aria-expanded="true" title="طي القائمة">‹</button><button class="icon-btn sidebar-close" id="closeSidebar" type="button" aria-label="إغلاق القائمة">×</button></div>
       </div>
       <nav class="main-nav" aria-label="التنقل الرئيسي">
-        <button class="nav-item active" data-page="home"><span class="nav-icon">⌂</span><span>الرئيسية</span></button>
-        <button class="nav-item" data-page="calendar"><span class="nav-icon">▦</span><span>التقويم</span></button>
-        <button class="nav-item" data-page="tasks"><span class="nav-icon">☷</span><span>المهام</span><span class="nav-count" id="taskCount">0</span></button>
-        <button class="nav-item" data-page="notes"><span class="nav-icon">▤</span><span>الملاحظات</span></button>
-        <button class="nav-item" data-page="library"><span class="nav-icon">▣</span><span>القاعدة الرئيسية</span></button>
+        <button class="nav-item active" data-page="home"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>الرئيسية</span></button>
+        <button class="nav-item" data-page="tasks"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg><span>المهام</span><span class="nav-count" id="taskCount">0</span></button>
+        <button class="nav-item" data-page="notes"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5M8 13h8M8 17h8"/></svg><span>الملاحظات</span></button>
+        <button class="nav-item" data-page="calendar"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg><span>التقويم</span></button>
+        <button class="nav-item" data-page="library"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 1 4 17.5zM4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 6h8M8 10h8"/></svg><span>القاعدة الرئيسية</span></button>
         <div class="nav-separator"></div>
-        <button class="nav-item" data-page="archive"><span class="nav-icon">▱</span><span>الأرشيف</span></button>
-        <button class="nav-item" data-page="analytics"><span class="nav-icon">◔</span><span>التحليلات</span></button>
-        <button class="nav-item" data-page="settings"><span class="nav-icon">⚙</span><span>الإعدادات</span></button>
+        <button class="nav-item" data-page="archive"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v4H3zM5 8v12h14V8M9 12h6"/></svg><span>الأرشيف</span></button>
+        <button class="nav-item" data-page="analytics"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h17M8 16v-4M13 16V8M18 16V4"/></svg><span>التحليلات</span></button>
+        <button class="nav-item" data-page="settings"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1 1.9-2 2-1.9-1.1-.2.1-2.1.9-.5 2.1h-2.8l-.5-2.1-2.1-.9-.2-.1-1.9 1.1-2-2 1.1-1.9-.1-.2-.9-2.1L2.4 12v-2.8l2.1-.5.9-2.1.1-.2-1.1-1.9 2-2 1.9 1.1.2-.1 2.1-.9.5-2.1h2.8l.5 2.1 2.1.9.2.1 1.9-1.1 2 2-1.1 1.9.1.2.9 2.1 2.1.5V12l-2.1.5z"/></svg><span>الإعدادات</span></button>
       </nav>
       <div class="sidebar-bottom">
         <div class="mini-profile"><div class="avatar">م</div><div><strong>MADAR</strong><small>بياناتك على هذا الجهاز</small></div></div>
@@ -63,10 +63,14 @@
       <section class="page active" id="page-home">
         <div class="welcome-card">
           <div class="welcome-copy">
-            <div class="eyebrow">مساحتك، بإيقاعك</div>
+            <div class="welcome-kicker"><span class="welcome-kicker-mark"></span> مساحة عملك الشخصية</div>
             <h1 id="greeting">صباح الخير</h1>
             <p id="todayDate">اليوم هو يوم جديد لتنجز شيئاً رائعاً.</p>
-            <div class="clock-row"><strong id="clock">09:41</strong><span id="dayProgress">بداية يوم جميل</span></div>
+          </div>
+          <div class="welcome-time" aria-label="الوقت الحالي">
+            <span class="welcome-time-label">الوقت الآن</span>
+            <strong id="clock">09:41</strong>
+            <span class="welcome-time-note" id="dayProgress">بداية يوم جميل</span>
           </div>
         </div>
 
@@ -140,7 +144,6 @@
       </section>
 
       <section class="page" id="page-settings">
-        <div class="page-intro settings-intro"><div><div class="eyebrow">تحكم كامل بمساحة عملك</div><h1>الإعدادات</h1><p>إدارة المظهر والتفضيلات والخصوصية والبيانات، بأسلوب إعدادات الهاتف.</p></div></div>
         <div id="settingsHome" class="settings-home">
           <div class="settings-search"><span>⌕</span><input id="settingsSearch" type="search" placeholder="ابحث في الإعدادات" aria-label="ابحث في الإعدادات"></div>
           <section class="settings-group"><div class="settings-group-title">التفضيلات</div>
@@ -170,12 +173,12 @@
     </main>
   </div>
 
-  <nav class="mobile-nav">
-    <button class="active" data-page="home"><span>⌂</span>الرئيسية</button>
-    <button data-page="tasks"><span>☷</span>المهام</button>
-    <button data-page="calendar"><span>▦</span>التقويم</button>
-    <button data-page="notes"><span>▤</span>ملاحظات</button>
-    <button data-page="settings"><span>⚙</span>الإعدادات</button>
+  <nav class="mobile-nav" aria-label="التنقل السريع">
+    <button class="active" data-page="home"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>الرئيسية</button>
+    <button data-page="tasks"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>المهام</button>
+    <button data-page="notes"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5M8 13h8M8 17h8"/></svg>الملاحظات</button>
+    <button data-page="calendar"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01"/></svg>التقويم</button>
+    <button data-page="library"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 1 4 17.5zM4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 6h8M8 10h8"/></svg>القاعدة</button>
   </nav>
 
   <div class="modal-backdrop hidden" id="modalBackdrop">
