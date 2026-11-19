@@ -1,68 +1,49 @@
-const CACHE_NAME = "madar-shell-v10";
-const APP_SHELL = [
-  "/",
-  "/index.html",
-  "/styles.css",
-  "/app.js",
-  "/manifest.webmanifest",
-  "/assets/icon-192.png",
-  "/assets/icon-512.png",
-  "/assets/madar-logo.png",
-  "/assets/madar-logo-dark.png",
-  "/assets/madar-logo-original.png",
-  "/assets/madar-logo-fallback.png"
-];
+/* Vaulty — Service Worker: يتيح العمل بدون إنترنت */
+const CACHE = 'vaulty-1.0.14-ios3';
+const ASSETS = ['./', './index.html', './style.css', './app.js', './manifest.webmanifest',
+  './icons/icon-192.png', './icons/icon-512.png', './icons/maskable-512.png', './icons/apple-touch-icon.png', './icons/icon.svg',
+  './fonts/NotoSansArabic-Regular.ttf', './fonts/NotoSansArabic-Medium.ttf', './fonts/NotoSansArabic-Bold.ttf'];
 
-self.addEventListener("install", event => {
-  event.waitUntil((async () => {
-    const cache = await caches.open(CACHE_NAME);
-    await cache.addAll(APP_SHELL);
-    await self.skipWaiting();
-  })());
-});
+// Safari يرفض أي استجابة من الـ Service Worker فيها إعادة توجيه (redirect)؛ نُنشئ نسخة نظيفة منها.
+async function clean(res) {
+  if (!res.redirected) return res;
+  const body = await res.blob();
+  return new Response(body, { status: res.status, statusText: res.statusText, headers: res.headers });
+}
 
-self.addEventListener("activate", event => {
-  event.waitUntil((async () => {
-    const keys = await caches.keys();
-    await Promise.all(keys.filter(key => key.startsWith("madar-shell-") && key !== CACHE_NAME).map(key => caches.delete(key)));
-    await self.clients.claim();
-  })());
-});
-
-self.addEventListener("fetch", event => {
-  const request = event.request;
-  if (request.method !== "GET") return;
-  const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
-
-  if (request.mode === "navigate") {
-    event.respondWith((async () => {
-      try {
-        const response = await fetch(request);
-        if (response.ok) {
-          const cache = await caches.open(CACHE_NAME);
-          cache.put("/index.html", response.clone());
-        }
-        return response;
-      } catch {
-        return (await caches.match("/index.html")) || Response.error();
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(CACHE).then(async c => {
+      for (const a of ASSETS) {
+        const r = await fetch(a, { cache: 'reload' });
+        if (!r.ok) throw new Error('asset-failed: ' + a);
+        await c.put(a, await clean(r));
       }
-    })());
+    }).then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', e => {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+
+  // ملفات التطبيق: من الذاكرة أولاً ثم الشبكة. تحديث الكاش لا يمس بيانات الخزنة في localStorage.
+  if (url.origin === location.origin) {
+    e.respondWith(
+      caches.match(req, { ignoreSearch: true }).then(hit => hit ? clean(hit) : fetch(req).then(async res => {
+        const out = await clean(res);
+        if (out.ok) { const copy = out.clone(); caches.open(CACHE).then(c => c.put(req, copy)); }
+        return out;
+      }).catch(() => caches.match('./index.html').then(r => r ? clean(r) : Response.error())))
+    );
     return;
   }
-
-  event.respondWith((async () => {
-    const cached = await caches.match(request);
-    if (cached) return cached;
-    try {
-      const response = await fetch(request);
-      if (response.ok) {
-        const cache = await caches.open(CACHE_NAME);
-        cache.put(request, response.clone());
-      }
-      return response;
-    } catch {
-      return Response.error();
-    }
-  })());
 });

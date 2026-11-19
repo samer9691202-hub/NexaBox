@@ -1,204 +1,261 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#191A1B">
-  <meta name="description" content="MADAR — مساحة عربية لتنظيم المهام والملاحظات والتذكيرات">
-  <title>MADAR | مدار</title>
-  <link rel="manifest" href="/manifest.webmanifest">
-  <link rel="icon" href="/assets/icon-192.png" type="image/png">
-  <link rel="preload" as="image" href="/assets/madar-logo.png">
-  <link rel="apple-touch-icon" href="/assets/icon-192.png">
-  <link rel="stylesheet" href="/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="theme-color" content="#101a2d">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Vaulty">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="description" content="Vaulty — خزنة رقمية لكلمات المرور تعمل محلياً على جهازك مع تشفير كامل للبيانات.">
+<title>Vaulty — خزنتك الرقمية</title>
+<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="lockScreen" class="lock-screen hidden">
-    <div class="lock-card">
-      <img class="brand-logo brand-logo-large" src="/assets/madar-logo.png" data-logo-light="/assets/madar-logo.png" data-logo-dark="/assets/madar-logo-dark.png" data-logo-fallback="/assets/madar-logo-fallback.png" alt="MADAR" width="1344" height="172" decoding="async" fetchpriority="high">
-      <h1>مرحباً بعودتك</h1>
-      <p>أدخل رمز PIN لفتح مساحة العمل</p>
-      <input id="unlockPin" class="pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" aria-label="رمز PIN">
-      <button id="unlockBtn" class="primary-btn full">فتح التطبيق</button>
-      <button id="recoverPinBtn" class="text-btn full" type="button">نسيت رمز PIN؟ استرداد الوصول</button>
-      <p id="unlockError" class="error-text"></p>
+
+<div class="app is-locked" id="app">
+  <header class="header">
+    <div class="brand">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg>
+      </div>
+      <div>
+        <div class="brand-name">vault<span>y.</span></div>
+        <div class="brand-sub">مساحتك الآمنة لكل ما يهمك</div>
+      </div>
+    </div>
+    <div class="head-actions">
+      <button type="button" class="ghost-btn" id="generatorBtn">✧ <span>مولّد كلمات المرور</span></button>
+      <button type="button" class="icon-btn" id="settingsBtn" title="إعدادات التطبيق" aria-label="إعدادات التطبيق">⚙</button>
+      <button type="button" class="icon-btn" id="lockBtn" title="قفل الخزنة" aria-label="قفل الخزنة">⌑</button>
+    </div>
+  </header>
+
+  <section class="welcome">
+    <div>
+      <div class="eyebrow">مساحة خاصة · تخزين محلي مشفّر على الجهاز</div>
+      <h1>أهلاً بعودتك 👋</h1>
+      <p>كل بياناتك المهمة، مرتبة في مكان واحد.</p>
+    </div>
+    <div class="status"><i class="dot"></i> الخزنة مفتوحة</div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><div class="stat-label">إجمالي العناصر المحفوظة</div><div class="stat-number" id="totalCount">0 <small>عنصر</small></div><div class="stat-icon">✧</div></div>
+    <div class="stat"><div class="stat-label">كلمات مرور قوية</div><div class="stat-number" id="strongCount">0</div></div>
+    <div class="stat"><div class="stat-label">الفئات المستخدمة</div><div class="stat-number" id="categoryCount">0</div></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div><h2>خزنتك</h2><p>إدارة حساباتك وبيانات الدخول بسهولة</p></div>
+      <button type="button" class="primary-btn" id="addBtn">＋ إضافة عنصر</button>
+    </div>
+    <div class="toolbar">
+      <div class="search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+        <input id="searchInput" type="search" placeholder="ابحث عن حساب أو موقع..." aria-label="بحث في الخزنة" autocomplete="off">
+      </div>
+    </div>
+    <div class="filters" id="filters">
+      <button type="button" class="filter active" data-cat="الكل">الكل</button>
+      <button type="button" class="filter" data-cat="شخصي">شخصي</button>
+      <button type="button" class="filter" data-cat="عمل">عمل</button>
+      <button type="button" class="filter" data-cat="تواصل اجتماعي">تواصل اجتماعي</button>
+      <button type="button" class="filter" data-cat="تسوق">تسوق</button>
+      <button type="button" class="filter" data-cat="مالي">مالي</button>
+      <button type="button" class="filter" data-cat="أخرى">أخرى</button>
+    </div>
+    <div class="vault-grid" id="vaultGrid"></div>
+  </section>
+
+  <input type="file" id="importFile" accept=".json,application/json" hidden>
+
+  <p class="bottom-note">Vaulty · بياناتك مشفّرة وتبقى على هذا الجهاز · لا تشارك كلمة مرورك الرئيسية مع أي شخص</p>
+</div>
+
+<!-- إعدادات التطبيق -->
+<div class="overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+  <div class="modal settings-modal">
+    <div class="modal-head"><h3 id="settingsTitle">إعدادات التطبيق</h3><button type="button" class="close" data-close="settingsOverlay" aria-label="إغلاق">×</button></div>
+    <div class="settings-group">
+      <div class="settings-heading">أمان الخزنة</div>
+      <button type="button" class="settings-row" id="changeMasterBtn"><span><b>كلمة المرور الرئيسية</b><small>تغيير كلمة المرور مع الاحتفاظ بجميع بياناتك</small></span><i>›</i></button>
+      <button type="button" class="settings-row" id="newRecoveryBtn"><span><b>رمز الاسترداد</b><small>إنشاء رمز جديد وإظهاره لحفظه في مكان آمن</small></span><i>›</i></button>
+    </div>
+    <div class="settings-group">
+      <div class="settings-heading">النسخ الاحتياطي</div>
+      <button type="button" class="settings-row" id="exportBtn"><span><b>تصدير نسخة احتياطية</b><small>حفظ نسخة مشفّرة من الخزنة في ملف</small></span><i>⇩</i></button>
+      <button type="button" class="settings-row" id="importBtn"><span><b>استيراد نسخة احتياطية</b><small>استعادة خزنة من ملف Vaulty سابق</small></span><i>⇧</i></button>
+      <p class="settings-warning">ملف النسخة الاحتياطية مشفّر. يتحقق Vaulty من كلمة المرور وسلامة البيانات قبل الاستبدال، ويحتفظ بنسخة رجوع عند فشل العملية.</p>
     </div>
   </div>
+</div>
 
-  <div class="app-shell">
-    <button class="sidebar-backdrop" id="sidebarBackdrop" aria-label="إغلاق القائمة"></button>
-    <aside class="sidebar" id="sidebar" aria-label="القائمة الجانبية">
-      <div class="brand">
-        <img class="brand-logo" src="/assets/madar-logo.png" data-logo-light="/assets/madar-logo.png" data-logo-dark="/assets/madar-logo-dark.png" data-logo-fallback="/assets/madar-logo-fallback.png" alt="MADAR" width="1344" height="172" decoding="async" fetchpriority="high">
-        <div class="brand-name">MADAR<span>خطط بهدوء، وأنجز بوضوح</span></div>
-        <div class="sidebar-controls"><button class="icon-btn collapse-btn" id="collapseSidebar" type="button" aria-label="طي القائمة" aria-expanded="true" title="طي القائمة">‹</button><button class="icon-btn sidebar-close" id="closeSidebar" type="button" aria-label="إغلاق القائمة">×</button></div>
-      </div>
-      <nav class="main-nav" aria-label="التنقل الرئيسي">
-        <button class="nav-item active" data-page="home"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>الرئيسية</span></button>
-        <button class="nav-item" data-page="tasks"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg><span>المهام</span><span class="nav-count" id="taskCount">0</span></button>
-        <button class="nav-item" data-page="notes"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5M8 13h8M8 17h8"/></svg><span>الملاحظات</span></button>
-        <button class="nav-item" data-page="calendar"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 17h.01M12 17h.01"/></svg><span>التقويم</span></button>
-        <button class="nav-item" data-page="library"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 1 4 17.5zM4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 6h8M8 10h8"/></svg><span>القاعدة الرئيسية</span></button>
-        <div class="nav-separator"></div>
-        <button class="nav-item" data-page="archive"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h18v4H3zM5 8v12h14V8M9 12h6"/></svg><span>الأرشيف</span></button>
-        <button class="nav-item" data-page="analytics"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h17M8 16v-4M13 16V8M18 16V4"/></svg><span>التحليلات</span></button>
-        <button class="nav-item" data-page="settings"><svg class="nav-icon nav-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.1 1.9-2 2-1.9-1.1-.2.1-2.1.9-.5 2.1h-2.8l-.5-2.1-2.1-.9-.2-.1-1.9 1.1-2-2 1.1-1.9-.1-.2-.9-2.1L2.4 12v-2.8l2.1-.5.9-2.1.1-.2-1.1-1.9 2-2 1.9 1.1.2-.1 2.1-.9.5-2.1h2.8l.5 2.1 2.1.9.2.1 1.9-1.1 2 2-1.1 1.9.1.2.9 2.1 2.1.5V12l-2.1.5z"/></svg><span>الإعدادات</span></button>
-      </nav>
-      <div class="sidebar-bottom">
-        <div class="mini-profile"><div class="avatar">م</div><div><strong>MADAR</strong><small>بياناتك على هذا الجهاز</small></div></div>
-        <div class="sidebar-foot">نسخة محلية · تعمل دون إنترنت</div>
-      </div>
-    </aside>
+<!-- تغيير كلمة المرور الرئيسية -->
+<div class="overlay" id="passwordSettingsOverlay" role="dialog" aria-modal="true" aria-labelledby="passwordSettingsTitle">
+  <div class="modal narrow">
+    <div class="modal-head"><h3 id="passwordSettingsTitle">تغيير كلمة المرور</h3><button type="button" class="close" data-close="passwordSettingsOverlay" aria-label="إغلاق">×</button></div>
+    <form id="changeMasterForm" autocomplete="off">
+      <div class="field"><label for="currentMasterPassword">كلمة المرور الحالية</label><input id="currentMasterPassword" type="password" required autocomplete="current-password"></div>
+      <div class="field settings-field"><label for="newMasterPassword">كلمة المرور الجديدة (12 حرفاً على الأقل)</label><input id="newMasterPassword" type="password" required minlength="12" autocomplete="new-password">
+      <div id="changePasswordStrength" class="strength-hint" aria-live="polite"></div></div>
+      <div class="field settings-field"><label for="confirmNewMasterPassword">تأكيد كلمة المرور الجديدة</label><input id="confirmNewMasterPassword" type="password" required minlength="12" autocomplete="new-password"></div>
+      <div class="lock-error" id="passwordChangeError" role="alert"></div>
+      <div class="modal-actions"><button class="primary-btn" type="submit" id="saveMasterPasswordBtn">حفظ كلمة المرور الجديدة</button><button class="secondary" type="button" data-close="passwordSettingsOverlay">إلغاء</button></div>
+    </form>
+  </div>
+</div>
 
-    <main class="main-area">
-      <header class="topbar">
-        <button class="icon-btn mobile-menu" id="mobileMenu" aria-label="فتح القائمة" aria-controls="sidebar" aria-expanded="false">☰</button>
-        <div class="breadcrumb"><span>MADAR</span><b>/</b><strong id="pageTitle">الرئيسية</strong></div>
-        <div class="top-actions">
-          <label class="search-box"><span>⌕</span><input id="globalSearch" type="search" placeholder="ابحث في MADAR"></label>
-          <button class="icon-btn" id="quickAdd" title="إضافة سريعة">＋</button>
-          <button class="icon-btn" id="themeToggle" title="تبديل المظهر">☾</button>
-          <div class="connection-pill"><i></i><span id="connectionText">محلي</span></div>
+<!-- تعيين رمز الاسترداد الذي يختاره المستخدم -->
+<div class="overlay" id="recoverySettingsOverlay" role="dialog" aria-modal="true" aria-labelledby="recoverySettingsTitle">
+  <div class="modal narrow">
+    <div class="modal-head"><h3 id="recoverySettingsTitle">تعيين رمز الاسترداد</h3><button type="button" class="close" data-close="recoverySettingsOverlay" aria-label="إغلاق">×</button></div>
+    <p class="hint" id="recoverySettingsHint">اختر رمزاً لا يقل عن 8 أحرف واحفظه في مكان آمن.</p>
+    <form id="recoverySettingsForm" autocomplete="off">
+      <div class="field"><label for="newRecoveryCode">رمز الاسترداد الجديد</label><input id="newRecoveryCode" type="password" required minlength="8" autocomplete="new-password"></div>
+      <div class="field settings-field"><label for="confirmNewRecoveryCode">تأكيد رمز الاسترداد</label><input id="confirmNewRecoveryCode" type="password" required minlength="8" autocomplete="new-password"></div>
+      <div class="lock-error" id="recoverySettingsError" role="alert"></div>
+      <div class="modal-actions"><button class="primary-btn" type="submit" id="saveRecoveryCodeBtn">حفظ رمز الاسترداد</button><button class="secondary" type="button" data-close="recoverySettingsOverlay">إلغاء</button></div>
+    </form>
+  </div>
+</div>
+
+<!-- إضافة / تعديل عنصر -->
+<div class="overlay" id="itemOverlay" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+  <div class="modal">
+    <div class="modal-head"><h3 id="formTitle">إضافة إلى الخزنة</h3><button type="button" class="close" data-close="itemOverlay" aria-label="إغلاق">×</button></div>
+    <form id="itemForm" autocomplete="off">
+      <input type="hidden" id="itemId">
+      <div class="form-grid">
+        <div class="field"><label for="name">اسم الحساب / الخدمة *</label><input id="name" required maxlength="60" placeholder="مثلاً: Google"></div>
+        <div class="field"><label for="category">الفئة</label>
+          <select id="category"><option>شخصي</option><option>عمل</option><option>تواصل اجتماعي</option><option>تسوق</option><option>مالي</option><option>أخرى</option></select>
         </div>
-      </header>
-
-      <section class="page active" id="page-home">
-        <div class="welcome-card">
-          <div class="welcome-copy">
-            <div class="welcome-kicker"><span class="welcome-kicker-mark"></span> مساحة عملك الشخصية</div>
-            <h1 id="greeting">صباح الخير</h1>
-            <p id="todayDate">اليوم هو يوم جديد لتنجز شيئاً رائعاً.</p>
+        <div class="field full"><label for="website">الموقع الإلكتروني</label><input id="website" maxlength="200" placeholder="example.com" dir="ltr"></div>
+        <div class="field full"><label for="username">اسم المستخدم / البريد</label><input id="username" maxlength="120" dir="ltr" placeholder="name@example.com"></div>
+        <div class="field full"><label for="password">كلمة المرور *</label>
+          <div class="password-wrap">
+            <input id="password" type="password" required maxlength="256" dir="ltr" autocomplete="new-password">
+            <button type="button" class="secondary" id="togglePassword" title="إظهار / إخفاء" aria-label="إظهار أو إخفاء كلمة المرور">◉</button>
+            <button type="button" class="secondary" id="makePassword">توليد</button>
           </div>
-          <div class="welcome-time" aria-label="الوقت الحالي">
-            <span class="welcome-time-label">الوقت الآن</span>
-            <strong id="clock">09:41</strong>
-            <span class="welcome-time-note" id="dayProgress">بداية يوم جميل</span>
-          </div>
         </div>
-
-        <div class="section-heading"><div><h2>نظرة سريعة</h2><p>ملخص إنجازاتك حتى الآن</p></div><button class="text-btn" data-go="analytics">عرض التحليلات ←</button></div>
-        <div class="stats-grid">
-          <article class="stat-card"><div class="stat-icon lilac">☷</div><div><span>إجمالي المهام النشطة</span><strong id="statTotal">0</strong><small>كل ما ينتظر إنجازه</small></div></article>
-          <article class="stat-card"><div class="stat-icon blue">✓</div><div><span>مهام مكتملة</span><strong id="statDone">0</strong><small>خطوات أنجزتها</small></div></article>
-          <article class="stat-card"><div class="stat-icon pink">◷</div><div><span>مهام اليوم</span><strong id="statToday">0</strong><small>مجدولة لهذا اليوم</small></div></article>
-          <article class="stat-card"><div class="stat-icon violet">▤</div><div><span>الملاحظات</span><strong id="statNotes">0</strong><small>أفكارك في مكان واحد</small></div></article>
-        </div>
-
-        <div class="home-columns">
-          <section class="panel task-panel">
-            <div class="panel-heading"><div><h2>مهام اليوم</h2><p>ابدأ بالأهم، والباقي سيأتي</p></div><button class="round-add" data-add="task">＋</button></div>
-            <div id="homeTasks" class="task-list"></div>
-            <button class="panel-link" data-go="tasks">كل المهام <span>←</span></button>
-          </section>
-          <section class="panel reminder-panel">
-            <div class="panel-heading"><div><h2>التذكيرات القادمة</h2><p>أشياء لا تريد نسيانها</p></div><button class="round-add" data-add="reminder">＋</button></div>
-            <div id="homeReminders" class="reminder-list"></div>
-            <button class="panel-link" data-go="calendar">فتح التقويم <span>←</span></button>
-          </section>
-        </div>
-        <section class="panel notes-preview">
-          <div class="panel-heading"><div><h2>من ملاحظاتك</h2><p>أفكار تستحق أن تبقى قريبة</p></div><button class="text-btn" data-go="notes">عرض الكل ←</button></div>
-          <div id="homeNotes" class="notes-grid"></div>
-        </section>
-      </section>
-
-      <section class="page" id="page-tasks">
-        <div class="page-intro"><div><div class="eyebrow">خطوة تلو الأخرى</div><h1>المهام</h1><p>نظّم أولوياتك وحوّل خططك إلى إنجازات.</p></div><button class="primary-btn" data-add="task">＋ مهمة جديدة</button></div>
-        <div class="toolbar panel"><div class="segmented"><button class="selected" data-task-view="list">قائمة</button><button data-task-view="board">لوحة</button></div><select id="taskFilter"><option value="all">كل الحالات</option><option value="new">جديد</option><option value="progress">قيد التنفيذ</option><option value="done">مكتمل</option></select><select id="priorityFilter"><option value="all">كل الأولويات</option><option value="high">عاجلة</option><option value="medium">مهمة</option><option value="normal">عادية</option></select><div class="toolbar-spacer"></div><span class="muted" id="taskSummary">0 مهمة</span></div>
-        <div id="tasksContainer"></div>
-      </section>
-
-      <section class="page" id="page-notes">
-        <div class="page-intro"><div><div class="eyebrow">مساحة للأفكار</div><h1>الملاحظات</h1><p>التقط أفكارك، ورتّبها، وعد إليها وقتما تشاء.</p></div><button class="primary-btn" data-add="note">＋ ملاحظة جديدة</button></div>
-        <div class="toolbar panel"><label class="inline-search">⌕ <input id="notesSearch" placeholder="ابحث في الملاحظات"></label><select id="notesFilter"><option value="active">النشطة</option><option value="all">الكل</option></select></div>
-        <div id="notesContainer" class="notes-grid large-grid"></div>
-      </section>
-
-      <section class="page" id="page-calendar">
-        <div class="page-intro"><div><div class="eyebrow">رتّب وقتك</div><h1>التقويم</h1><p>شاهد مهامك وتذكيراتك عبر الأيام.</p></div><button class="primary-btn" data-add="task">＋ أضف مهمة</button></div>
-        <div class="calendar-layout">
-          <section class="panel calendar-panel"><div class="calendar-head"><button class="icon-btn" id="prevMonth">›</button><h2 id="monthLabel"></h2><button class="icon-btn" id="nextMonth">‹</button><button class="today-btn" id="goToday">اليوم</button></div><div class="calendar-grid" id="calendarGrid"></div></section>
-          <section class="panel day-panel"><div class="panel-heading"><div><h2 id="selectedDayTitle">تفاصيل اليوم</h2><p>مهام وتذكيرات هذا التاريخ</p></div><button class="round-add" id="addForDay">＋</button></div><div id="selectedDayItems"></div></section>
-        </div>
-      </section>
-
-      <section class="page" id="page-library">
-        <div class="page-intro"><div><div class="eyebrow">معلوماتك المهمة</div><h1>القاعدة الرئيسية</h1><p>احتفظ بالمعلومات والعناصر التي تحتاج الرجوع إليها.</p></div><button class="primary-btn" data-add="entry">＋ عنصر جديد</button></div>
-        <div class="toolbar panel"><label class="inline-search">⌕ <input id="librarySearch" placeholder="ابحث في العناصر"></label><span class="muted">مساحتك المرجعية الخاصة</span></div>
-        <div id="libraryContainer" class="library-grid"></div>
-      </section>
-
-      <section class="page" id="page-archive">
-        <div class="page-intro"><div><div class="eyebrow">احتفظ بما أنجزته</div><h1>الأرشيف</h1><p>العناصر المؤرشفة تبقى هنا حتى تقرر استعادتها أو حذفها.</p></div></div>
-        <div class="toolbar panel"><select id="archiveType"><option value="all">كل العناصر</option><option value="task">المهام</option><option value="note">الملاحظات</option><option value="entry">القاعدة الرئيسية</option></select></div>
-        <div id="archiveContainer"></div>
-      </section>
-
-      <section class="page" id="page-analytics">
-        <div class="page-intro"><div><div class="eyebrow">صورة أوضح لتقدمك</div><h1>التحليلات</h1><p>إحصائيات مباشرة مبنية على بياناتك الفعلية.</p></div></div>
-        <div class="stats-grid analytics-stats">
-          <article class="stat-card"><div class="stat-icon lilac">☷</div><div><span>كل المهام</span><strong id="anTotal">0</strong></div></article>
-          <article class="stat-card"><div class="stat-icon blue">✓</div><div><span>مكتملة</span><strong id="anDone">0</strong></div></article>
-          <article class="stat-card"><div class="stat-icon pink">◷</div><div><span>قيد التنفيذ</span><strong id="anProgress">0</strong></div></article>
-          <article class="stat-card"><div class="stat-icon violet">▤</div><div><span>ملاحظات</span><strong id="anNotes">0</strong></div></article>
-        </div>
-        <div class="analytics-grid"><section class="panel"><h2>حالة المهام</h2><div id="statusChart" class="bar-chart"></div></section><section class="panel"><h2>الأولويات</h2><div id="priorityChart" class="bar-chart"></div></section></div>
-      </section>
-
-      <section class="page" id="page-settings">
-        <div id="settingsHome" class="settings-home">
-          <div class="settings-search"><span>⌕</span><input id="settingsSearch" type="search" placeholder="ابحث في الإعدادات" aria-label="ابحث في الإعدادات"></div>
-          <section class="settings-group"><div class="settings-group-title">التفضيلات</div>
-            <button class="settings-link" data-settings-open="appearance"><span class="settings-symbol appearance-symbol">◐</span><span class="settings-link-copy"><strong>المظهر والشاشة</strong><small>الألوان، نمط العرض، إعدادات الوقت والتقويم</small></span><span class="settings-chevron">‹</span></button>
-          </section>
-          <section class="settings-group"><div class="settings-group-title">إدارة الجهاز والبيانات</div>
-            <button class="settings-link" data-settings-open="storage"><span class="settings-symbol storage-symbol">▣</span><span class="settings-link-copy"><strong>البيانات والنسخ الاحتياطي</strong><small>استيراد وتصدير وحالة التخزين</small></span><span class="settings-chevron">‹</span></button>
-            <button class="settings-link" data-settings-open="security"><span class="settings-symbol security-symbol">♢</span><span class="settings-link-copy"><strong>الأمان والخصوصية</strong><small>رمز PIN وقفل مساحة العمل</small></span><span class="settings-chevron">‹</span></button>
-          </section>
-          <section class="settings-group"><div class="settings-group-title">إدارة مساحة العمل</div>
-            <button class="settings-link" data-settings-open="advanced"><span class="settings-symbol advanced-symbol">⚙</span><span class="settings-link-copy"><strong>إعدادات متقدمة</strong><small>إجراءات إعادة التعيين وإدارة البيانات</small></span><span class="settings-chevron">‹</span></button>
-          </section>
-          <div class="version-note">مساحة العمل · الإصدار 1.0.0</div>
-        </div>
-        <div id="settingsDetail" class="settings-detail hidden">
-          <button class="settings-back" id="settingsBack"><span>›</span> كل الإعدادات</button>
-          <div class="settings-detail-heading"><div class="settings-detail-icon" id="settingsDetailIcon">◐</div><div><h2 id="settingsDetailTitle">المظهر والشاشة</h2><p id="settingsDetailDescription">خصص طريقة عرض التطبيق.</p></div></div>
-          <section class="panel settings-section settings-detail-panel" data-settings-panel="appearance"><div class="settings-panel-title">تخصيص العرض</div><div class="setting-row"><div><strong>نمط العرض</strong><small>فاتح أو داكن أو حسب إعدادات الجهاز</small></div><select id="themeSelect"><option value="light">فاتح</option><option value="dark">داكن</option><option value="system">تلقائي</option></select></div><div class="setting-row"><div><strong>بداية الأسبوع</strong><small>اليوم الأول في التقويم</small></div><select id="weekStart"><option value="6">السبت</option><option value="0">الأحد</option><option value="1">الاثنين</option></select></div><div class="setting-row"><div><strong>تنسيق الساعة</strong><small>طريقة عرض الوقت</small></div><select id="timeFormat"><option value="12">12 ساعة</option><option value="24">24 ساعة</option></select></div><div class="setting-row"><div><strong>إظهار الثواني</strong><small>إظهار الثواني في الساعة الرئيسية</small></div><input type="checkbox" id="showSeconds"></div></section>
-          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="storage"><div class="settings-panel-title">البيانات والنسخ الاحتياطي</div><div class="backup-action-group"><strong>نسخة عادية</strong><small>ملف JSON يمكنك نقله وفتحه، دون كلمة مرور.</small><div class="setting-actions"><button class="secondary-btn" id="exportBtn">تصدير نسخة JSON</button><button class="secondary-btn" id="importBtn">استيراد ملف JSON</button><input type="file" id="importFile" accept="application/json,.json" hidden></div></div><div class="backup-action-group"><strong>نسخة مشفّرة</strong><small>حماية بكلمة مرور باستخدام AES-256. استخدم كلمة المرور نفسها عند الاستعادة.</small><div class="setting-actions"><button class="secondary-btn" id="encryptedExport">تصدير نسخة مشفّرة</button><button class="secondary-btn" id="encryptedImport">استعادة نسخة مشفّرة</button><input type="file" id="encryptedFile" accept=".enc,.madar.enc,application/octet-stream,application/json" hidden></div></div><div class="backup-warning">عند الاستيراد اختر الدمج لإضافة العناصر الجديدة دون تكرار (مع الاحتفاظ بالبيانات الحالية)، أو الاستبدال لاستعادة النسخة بالكامل. يُنصح بتصدير نسخة احتياطية قبل الاستيراد. التشفير يتطلب تشغيل التطبيق عبر HTTPS أو localhost.</div><div class="setting-row"><div><strong>حالة التخزين</strong><small id="storageStatus">تخزين محلي على هذا الجهاز</small></div><span class="status-dot">نشط</span></div></section>
-          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="security"><div class="settings-panel-title">الأمان والخصوصية</div><div class="setting-row"><div><strong>رمز PIN</strong><small>رمز من 4 إلى 8 أرقام، مع رمز استرداد تختاره بنفسك</small></div><button class="secondary-btn" id="setPinBtn">إعداد / تغيير PIN</button></div><div class="setting-row"><div><strong>قفل التطبيق</strong><small>قفل مساحة العمل الآن</small></div><button class="secondary-btn" id="lockNowBtn">قفل الآن</button></div><div class="setting-row"><div><strong>إزالة رمز PIN</strong><small>تعطيل القفل المحلي</small></div><button class="danger-btn" id="removePinBtn">إزالة PIN</button></div></section>
-          <section class="panel settings-section settings-detail-panel hidden" data-settings-panel="advanced"><div class="settings-panel-title">إعدادات متقدمة</div><div class="setting-row danger-setting"><div><strong>مسح جميع البيانات</strong><small>حذف المهام والملاحظات والعناصر والتذكيرات نهائياً</small></div><button class="danger-btn" id="clearDataBtn">مسح البيانات</button></div></section>
-        </div>
-      </section>
-
-      <footer class="app-footer">صُممت لتمنح يومك مساحة أكبر للتركيز <span>✦</span></footer>
-    </main>
+        <div class="field full"><label for="notes">ملاحظات</label><input id="notes" maxlength="300" placeholder="ملاحظات اختيارية"></div>
+      </div>
+      <div class="modal-actions"><button class="primary-btn" type="submit">حفظ العنصر</button><button class="secondary" type="button" data-close="itemOverlay">إلغاء</button></div>
+    </form>
   </div>
+</div>
 
-  <nav class="mobile-nav" aria-label="التنقل السريع">
-    <button class="active" data-page="home"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg>الرئيسية</button>
-    <button data-page="tasks"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>المهام</button>
-    <button data-page="notes"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM14 3v5h5M8 13h8M8 17h8"/></svg>الملاحظات</button>
-    <button data-page="calendar"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01"/></svg>التقويم</button>
-    <button data-page="library"><svg class="nav-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 1 4 17.5zM4 17.5A2.5 2.5 0 0 1 6.5 15H20M8 6h8M8 10h8"/></svg>القاعدة</button>
-  </nav>
+<!-- مولّد كلمات المرور -->
+<div class="overlay" id="generatorOverlay" role="dialog" aria-modal="true" aria-labelledby="generatorTitle">
+  <div class="modal">
+    <div class="modal-head"><h3 id="generatorTitle">مولّد كلمات مرور قوية</h3><button type="button" class="close" data-close="generatorOverlay" aria-label="إغلاق">×</button></div>
+    <p class="hint">أنشئ كلمة مرور عشوائية باستخدام مولّد آمن من المتصفح.</p>
+    <div class="generator-output" id="generated" aria-live="polite">—</div>
+    <div class="field"><label for="lengthRange">طول كلمة المرور: <b id="lengthValue">18</b></label><input type="range" id="lengthRange" class="range" min="8" max="40" value="18"></div>
+    <div class="modal-actions"><button type="button" class="primary-btn" id="regenerate">توليد من جديد</button><button type="button" class="secondary" id="copyGenerated">نسخ</button></div>
+  </div>
+</div>
 
-  <div class="modal-backdrop hidden" id="modalBackdrop">
-    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-heading"><h2 id="modalTitle">إضافة عنصر</h2><button class="icon-btn" id="closeModal" aria-label="إغلاق">×</button></div>
-      <form id="itemForm"><div id="modalFields"></div><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">إلغاء</button><button type="submit" class="primary-btn">حفظ</button></div></form>
-    </section>
+<!-- تأكيد -->
+<div class="overlay on-top" id="confirmOverlay" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle">
+  <div class="modal narrow">
+    <div class="modal-head"><h3 id="confirmTitle">حذف العنصر؟</h3><button type="button" class="close" data-close="confirmOverlay" aria-label="إغلاق">×</button></div>
+    <p class="hint" id="confirmText">سيتم حذف هذا العنصر من الخزنة. لا يمكن التراجع عن هذه الخطوة.</p>
+    <div class="modal-actions"><button type="button" class="primary-btn btn-danger" id="confirmOk">حذف نهائياً</button><button type="button" class="secondary" data-close="confirmOverlay">إلغاء</button></div>
   </div>
-  <div class="app-dialog-backdrop hidden" id="appDialog" aria-hidden="true">
-    <section class="app-dialog-card" role="dialog" aria-modal="true" aria-labelledby="appDialogTitle">
-      <div class="app-dialog-top"><div class="app-dialog-icon app-dialog-icon" data-kind="info">✦</div><span class="app-dialog-brand">MADAR</span></div>
-      <h2 class="app-dialog-title" id="appDialogTitle">تأكيد</h2>
-      <p class="app-dialog-message"></p>
-      <div class="app-dialog-field"></div>
-      <div class="app-dialog-actions"></div>
-      <div class="app-dialog-foot">مساحة عملك، بياناتك بأمان</div>
-    </section>
+</div>
+
+<!-- التحقق من النسخة الاحتياطية قبل استبدال الخزنة -->
+<div class="overlay on-top" id="importPasswordOverlay" role="dialog" aria-modal="true" aria-labelledby="importPasswordTitle">
+  <div class="modal narrow">
+    <div class="modal-head"><h3 id="importPasswordTitle">التحقق من النسخة الاحتياطية</h3><button type="button" class="close" data-close="importPasswordOverlay" aria-label="إغلاق">×</button></div>
+    <p class="hint">أدخل كلمة المرور الرئيسية المرتبطة بالنسخة. ستبقى خزنتك الحالية كما هي إذا فشل التحقق.</p>
+    <form id="importPasswordForm">
+      <div class="field"><label for="importMasterPassword">كلمة مرور النسخة الاحتياطية</label><input id="importMasterPassword" type="password" autocomplete="current-password" required></div>
+      <p class="form-error" id="importPasswordError" role="alert"></p>
+      <div class="modal-actions"><button type="submit" class="primary-btn" id="verifyImportBtn">تحقق واستيراد آمن</button><button type="button" class="secondary" id="cancelImportPassword">إلغاء</button></div>
+    </form>
   </div>
-  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
-  <script src="/app.js" defer></script>
+</div>
+
+<!-- نافذة مخصصة لتعيين كلمة مرور جديدة بعد التحقق من رمز الاسترداد -->
+<div class="overlay on-top" id="recoveryPasswordOverlay" role="dialog" aria-modal="true" aria-labelledby="recoveryPasswordTitle">
+  <div class="modal narrow recovery-password-modal">
+    <div class="recovery-modal-icon" aria-hidden="true">✓</div>
+    <div class="recovery-modal-heading">
+      <span class="eyebrow">استعادة آمنة</span>
+      <h3 id="recoveryPasswordTitle">تم التحقق من رمز الاسترداد</h3>
+      <p class="hint">أنشئ كلمة مرور رئيسية جديدة للعودة إلى خزنتك. ستبقى بياناتك كما هي.</p>
+    </div>
+    <form id="recoveryPasswordForm">
+      <div class="field recovery-password-field">
+        <label for="recoveryNewPassword">كلمة المرور الجديدة</label>
+        <input id="recoveryNewPassword" type="password" minlength="12" autocomplete="new-password" placeholder="أدخل كلمة مرور جديدة (12 حرفاً على الأقل)" required>
+      </div>
+      <div class="strength-hint" id="recoveryPasswordStrength" aria-live="polite"></div>
+      <div class="field recovery-password-field">
+        <label for="recoveryConfirmPassword">تأكيد كلمة المرور</label>
+        <input id="recoveryConfirmPassword" type="password" minlength="12" autocomplete="new-password" placeholder="أعد كتابة كلمة المرور" required>
+      </div>
+      <div class="recovery-password-error" id="recoveryPasswordError" role="alert"></div>
+      <div class="recovery-password-actions">
+        <button type="submit" class="primary-btn full-width" id="saveRecoveredPasswordBtn">حفظ كلمة المرور</button>
+        <button type="button" class="secondary full-width" id="cancelRecoveryPassword">إلغاء والعودة</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- عرض رمز الاسترداد مرة واحدة -->
+<div class="overlay" id="recoveryCodeOverlay" role="dialog" aria-modal="true" aria-labelledby="recoveryCodeTitle">
+  <div class="modal narrow recovery-modal">
+    <div class="modal-head"><h3 id="recoveryCodeTitle">احفظ رمز الاسترداد</h3></div>
+    <p class="hint">احتفظ بهذا الرمز في مكان آمن خارج الجهاز. ستحتاج إليه إذا نسيت كلمة المرور الرئيسية. لن نتمكن من إظهاره مرة أخرى.</p>
+    <div class="recovery-code" id="recoveryCodeBox" dir="ltr"></div>
+    <div class="modal-actions"><button type="button" class="secondary" id="copyRecoveryCode">نسخ الرمز</button><button type="button" class="primary-btn" id="closeRecoveryCode">حفظت الرمز</button></div>
+  </div>
+</div>
+
+<!-- شاشة القفل / إنشاء الخزنة -->
+<div class="lock-screen show" id="lockScreen" role="dialog" aria-modal="true" aria-labelledby="lockTitle">
+  <form class="lock-box" id="lockForm">
+    <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></svg></div>
+    <h2 id="lockTitle">خزنتك مقفلة</h2>
+    <p id="lockText">أدخل كلمة المرور الرئيسية للمتابعة.<br>ستبقى بياناتك على هذا الجهاز.</p>
+    <input id="unlockPassword" type="password" placeholder="كلمة المرور الرئيسية" aria-label="كلمة المرور الرئيسية" autocomplete="current-password">
+    <input id="confirmPassword" type="password" placeholder="أعد كتابة كلمة المرور الرئيسية" aria-label="تأكيد كلمة المرور الرئيسية" autocomplete="new-password" hidden>
+    <div id="setupPasswordStrength" class="strength-hint" aria-live="polite"></div>
+    <div id="setupRecoveryFields" class="setup-recovery-fields" hidden>
+      <label for="setupRecoveryCode">اختر رمز الاسترداد بنفسك</label>
+      <input id="setupRecoveryCode" type="password" placeholder="رمز الاسترداد (8 أحرف على الأقل)" autocomplete="new-password">
+      <input id="confirmSetupRecoveryCode" type="password" placeholder="تأكيد رمز الاسترداد" autocomplete="new-password">
+      <small>أنت من يحدد الرمز. احفظه في مكان آمن؛ ستحتاج إليه فقط إذا نسيت كلمة المرور.</small>
+    </div>
+    <div class="recovery-panel" id="recoveryPanel" hidden>
+      <h3 class="recovery-panel-title">استعادة الخزنة</h3>
+      <p class="recovery-panel-description">أدخل رمز الاسترداد الذي اخترته لاستعادة بياناتك وتعيين كلمة مرور جديدة.</p>
+      <label for="recoveryInput">رمز الاسترداد</label>
+      <input id="recoveryInput" type="password" placeholder="أدخل رمز الاسترداد الذي اخترته" autocomplete="off">
+      <button type="button" class="primary-btn full-width" id="recoverSubmitBtn">استرداد الخزنة وتغيير كلمة المرور</button>
+      <button type="button" class="lock-link" id="cancelRecoveryBtn">العودة إلى كلمة المرور</button>
+    </div>
+    <div class="lock-error" id="lockError" role="alert"></div>
+    <button type="submit" class="primary-btn full-width" id="unlockBtn">فتح الخزنة</button>
+    <button type="button" class="lock-link" id="recoverVaultBtn" hidden>نسيت كلمة المرور؟ استرداد الخزنة</button>
+  </form>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
 </body>
 </html>
