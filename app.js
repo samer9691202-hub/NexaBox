@@ -293,6 +293,8 @@
   <div class="credential"><span class="masked" id="pw-${x.id}">${MASK}</span><div class="mini-actions">
     <button type="button" title="إظهار / إخفاء" aria-label="إظهار أو إخفاء كلمة المرور" data-reveal="${x.id}">◉</button>
     <button type="button" title="نسخ كلمة المرور" aria-label="نسخ كلمة المرور" data-copy="${x.id}">▢</button>
+    ${x.username ? `<button type="button" title="نسخ اسم المستخدم" aria-label="نسخ اسم المستخدم" data-copyuser="${x.id}">@</button>` : ''}
+    <button type="button" title="حذف العنصر" aria-label="حذف العنصر" data-delete="${x.id}">⌫</button>
   </div></div>
   <div class="item-actions"><button type="button" class="secondary" data-detail="${x.id}">التفاصيل</button><button type="button" class="primary-btn" data-edit="${x.id}">تعديل</button></div>
 </article>`).join('') : `<div class="empty"><div class="empty-icon">◇</div><b>${items.length ? 'لا توجد نتائج مطابقة' : 'خزنتك تبدأ من هنا'}</b><span>${items.length ? 'جرّب كلمة بحث أو فئة مختلفة.' : 'أضف أول حساب واحفظ بياناته في مكان مرتب.'}</span>${!items.length ? '<br><button type="button" class="primary-btn" data-action="add">＋ إضافة أول عنصر</button>' : ''}</div>`;
