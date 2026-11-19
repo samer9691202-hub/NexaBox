@@ -538,3 +538,15 @@ html.privacy-hidden body { background: #0b1220 !important; }
 html.privacy-hidden #app { visibility: hidden !important; filter: blur(18px); }
 html.privacy-hidden #lockScreen { visibility: visible !important; }
 .form-error { color: var(--red); min-height: 1.2em; font-size: 13px; margin: 8px 0; }
+
+
+/* أزرار البطاقة وتفاصيل العنصر */
+.item-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 15px; }
+.item-actions button { min-height: 39px; border-radius: 11px; font-size: 12px; }
+.details-content { display: grid; gap: 9px; }
+.detail-row { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid #ffffff12; background: #0d192b80; border-radius: 12px; min-width: 0; }
+.detail-value { display: grid; gap: 5px; min-width: 0; flex: 1; }
+.detail-value span { color: var(--muted); font-size: 11px; }
+.detail-value strong { color: var(--text); font-size: 13px; font-weight: 600; overflow-wrap: anywhere; white-space: pre-wrap; }
+.detail-copy { flex: 0 0 auto; padding: 7px 11px; font-size: 11px; }
+@media (max-width: 380px) { .detail-row { padding: 9px; } .detail-copy { padding: 6px 8px; } }

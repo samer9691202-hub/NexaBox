@@ -288,14 +288,13 @@
     $('#categoryCount').textContent = new Set(items.map(x => x.category)).size;
 
     $('#vaultGrid').innerHTML = shown.length ? shown.map(x => `<article class="item">
-  <div class="item-top"><div class="site-icon">${esc((x.name || '?').trim().slice(0, 1).toUpperCase())}</div><div class="item-title"><strong>${esc(x.name)}</strong><span>${esc(x.website || 'بدون موقع')}</span></div><button type="button" class="more" aria-label="تعديل العنصر" title="تعديل" data-edit="${x.id}">···</button></div>
+  <div class="item-top"><div class="site-icon">${esc((x.name || '?').trim().slice(0, 1).toUpperCase())}</div><div class="item-title"><strong>${esc(x.name)}</strong><span>${esc(x.website || 'بدون موقع')}</span></div></div>
   <div class="item-meta"><span class="tag">${esc(x.category)}</span><span>${strength(x.password) >= 3 ? '● كلمة قوية' : '○ كلمة مرور'}</span></div>
   <div class="credential"><span class="masked" id="pw-${x.id}">${MASK}</span><div class="mini-actions">
     <button type="button" title="إظهار / إخفاء" aria-label="إظهار أو إخفاء كلمة المرور" data-reveal="${x.id}">◉</button>
     <button type="button" title="نسخ كلمة المرور" aria-label="نسخ كلمة المرور" data-copy="${x.id}">▢</button>
-    ${x.username ? `<button type="button" title="نسخ اسم المستخدم" aria-label="نسخ اسم المستخدم" data-copyuser="${x.id}">@</button>` : ''}
-    <button type="button" title="حذف العنصر" aria-label="حذف العنصر" data-delete="${x.id}">⌫</button>
   </div></div>
+  <div class="item-actions"><button type="button" class="secondary" data-detail="${x.id}">التفاصيل</button><button type="button" class="primary-btn" data-edit="${x.id}">تعديل</button></div>
 </article>`).join('') : `<div class="empty"><div class="empty-icon">◇</div><b>${items.length ? 'لا توجد نتائج مطابقة' : 'خزنتك تبدأ من هنا'}</b><span>${items.length ? 'جرّب كلمة بحث أو فئة مختلفة.' : 'أضف أول حساب واحفظ بياناته في مكان مرتب.'}</span>${!items.length ? '<br><button type="button" class="primary-btn" data-action="add">＋ إضافة أول عنصر</button>' : ''}</div>`;
   }
 
@@ -323,6 +322,25 @@
     }
     openOverlay('itemOverlay');
     $('#name').focus();
+  }
+
+  function openDetails(item) {
+    const fields = [
+      ['الاسم', item.name], ['الفئة', item.category], ['الموقع الإلكتروني', item.website || 'غير محدد'],
+      ['اسم المستخدم / البريد', item.username || 'غير محدد'], ['كلمة المرور', item.password], ['ملاحظات', item.notes || 'لا توجد ملاحظات']
+    ];
+    $('#detailsTitle').textContent = item.name || 'تفاصيل العنصر';
+    $('#detailsContent').innerHTML = fields.map(([label, value], i) => `<div class="detail-row"><div class="detail-value"><span>${esc(label)}</span><strong dir="${i === 2 || i === 3 || i === 4 ? 'ltr' : 'auto'}">${esc(value)}</strong></div><button type="button" class="secondary detail-copy" data-detail-copy="${i}" aria-label="نسخ ${esc(label)}">نسخ</button></div>`).join('');
+    $('#detailsContent').dataset.itemId = item.id;
+    openOverlay('detailsOverlay');
+  }
+
+  async function copyDetailField(button) {
+    const item = state.items.find(z => z.id === $('#detailsContent').dataset.itemId);
+    if (!item) return;
+    const values = [item.name, item.category, item.website || '', item.username || '', item.password, item.notes || ''];
+    const value = values[Number(button.dataset.detailCopy)];
+    toast(await copyText(value) ? 'تم النسخ' : 'تعذر النسخ في هذا المتصفح');
   }
 
   function askConfirm({ title, text, label, danger = true, onConfirm }) {
@@ -365,10 +383,11 @@
     if (!b) return;
     if (b.dataset.action === 'add') { openForm(); return; }
     const d = b.dataset;
-    const id = d.edit || d.reveal || d.copy || d.copyuser || d.delete;
+    const id = d.detail || d.edit || d.reveal || d.copy || d.copyuser || d.delete;
     const x = state.items.find(z => z.id === id);
     if (!x) return;
 
+    if (d.detail) openDetails(x);
     if (d.edit) openForm(x);
 
     if (d.reveal) {
@@ -897,6 +916,9 @@
     $('#itemForm').addEventListener('submit', onItemSubmit);
 
     $('#vaultGrid').addEventListener('click', onGridClick);
+    $('#detailsContent').addEventListener('click', e => { const b = e.target.closest('[data-detail-copy]'); if (b) copyDetailField(b); });
+    $('#copyAllDetails').addEventListener('click', async () => { const item = state.items.find(z => z.id === $('#detailsContent').dataset.itemId); if (!item) return; const text = `الاسم: ${item.name}\nالفئة: ${item.category}\nالموقع الإلكتروني: ${item.website || 'غير محدد'}\nاسم المستخدم: ${item.username || 'غير محدد'}\nكلمة المرور: ${item.password}\nملاحظات: ${item.notes || 'لا توجد'}`; toast(await copyText(text) ? 'تم نسخ جميع المعلومات' : 'تعذر النسخ'); });
+    $('#editFromDetails').addEventListener('click', () => { const item = state.items.find(z => z.id === $('#detailsContent').dataset.itemId); if (item) { closeOverlay('detailsOverlay'); openForm(item); } });
     $('#vaultGrid').addEventListener('dblclick', e => {
       if (e.target.closest('button')) return;
       const card = e.target.closest('.item');
