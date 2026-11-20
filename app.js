@@ -314,6 +314,8 @@
     setPasswordVisible(false);
     $('#itemId').value = item?.id || '';
     $('#formTitle').textContent = item ? 'تعديل العنصر' : 'إضافة إلى الخزنة';
+    // Keep password generation available when adding, but hide it in edit mode.
+    $('#makePassword').hidden = !!item;
     if (item) {
       $('#name').value = item.name;
       $('#category').value = item.category;
